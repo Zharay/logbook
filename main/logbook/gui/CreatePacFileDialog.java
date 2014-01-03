@@ -86,7 +86,8 @@ public final class CreatePacFileDialog extends Dialog {
         composite.setLayout(new GridLayout(1, false));
 
         Label labelTitle = new Label(composite, SWT.NONE);
-        labelTitle.setText("This program is used to generate proxy auto-config (PAC) file which can be utilized by browsers to provide seamless proxy switching.");
+        labelTitle
+                .setText("This program is used to generate proxy auto-config (PAC) file which\ncan be utilized by browsers to provide seamless proxy switching.");
 
         String server = Filter.getServerName();
         if (server == null) {
