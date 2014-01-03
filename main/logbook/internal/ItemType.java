@@ -14,25 +14,25 @@ public class ItemType {
      */
     private static final Map<String, String> ITEMTYPE = new ConcurrentHashMap<String, String>() {
         {
-            this.put("1", "小口径主砲");
-            this.put("2", "中口径主砲");
-            this.put("3", "大口径主砲");
-            this.put("4", "副砲");
-            this.put("5", "魚雷");
-            this.put("6", "艦上戦闘機");
-            this.put("7", "艦上爆撃機");
-            this.put("8", "艦上攻撃機");
-            this.put("9", "艦上偵察機");
-            this.put("10", "水上偵察機");
-            this.put("11", "電波探信儀");
-            this.put("12", "対空砲弾");
-            this.put("13", "徹甲弾");
-            this.put("14", "ダメコン");
-            this.put("15", "対空機関砲");
-            this.put("16", "高角砲");
-            this.put("17", "爆雷投射機");
-            this.put("18", "水中探信儀");
-            this.put("19", "機関");
+            this.put("1", "Main Cannon");
+            this.put("2", "Main Cannon");
+            this.put("3", "Main Cannon");
+            this.put("4", "Secondary Cannon");
+            this.put("5", "Torpedo");
+            this.put("6", "Fighter");
+            this.put("7", "Dive Bomber");
+            this.put("8", "Torpedo Bomber");
+            this.put("9", "Recon Plane");
+            this.put("10", "Recon Seaplane");
+            this.put("11", "Air RADAR");
+            this.put("12", "AA ammo");
+            this.put("13", "AP ammo");
+            this.put("14", "Damage Control");
+            this.put("15", "AA Gun");
+            this.put("16", "High-Angle Gun");
+            this.put("17", "Depth Charge");
+            this.put("18", "SONAR");
+            this.put("19", "Engine");
         }
     };
 

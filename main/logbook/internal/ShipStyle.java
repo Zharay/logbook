@@ -14,24 +14,24 @@ public class ShipStyle {
      */
     private static final Map<String, String> SHIPSTYLE = new ConcurrentHashMap<String, String>() {
         {
-            this.put("1", "海防艦");
-            this.put("2", "駆逐艦");
-            this.put("3", "軽巡洋艦");
-            this.put("4", "重雷装巡洋艦");
-            this.put("5", "重巡洋艦");
-            this.put("6", "航空巡洋艦");
-            this.put("7", "軽空母");
-            this.put("8", "戦艦");
-            this.put("9", "戦艦");
-            this.put("10", "航空戦艦");
-            this.put("11", "正規空母");
-            this.put("12", "超弩級戦艦");
-            this.put("13", "潜水艦");
-            this.put("14", "潜水空母");
-            this.put("15", "補給艦");
-            this.put("16", "水上機母艦");
-            this.put("17", "揚陸艦");
-            this.put("18", "装甲空母");
+            this.put("1", "LCS");
+            this.put("2", "DD");
+            this.put("3", "CL");
+            this.put("4", "CLT");
+            this.put("5", "CA");
+            this.put("6", "CAV");
+            this.put("7", "CVL");
+            this.put("8", "BB");
+            this.put("9", "BB");
+            this.put("10", "BBV");
+            this.put("11", "CV");
+            this.put("12", "BBD");
+            this.put("13", "SS");
+            this.put("14", "SSV");
+            this.put("15", "AP");
+            this.put("16", "AV");
+            this.put("17", "LHA");
+            this.put("18", "CV");
         }
     };
 

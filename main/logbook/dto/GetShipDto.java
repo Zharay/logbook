@@ -161,9 +161,9 @@ public final class GetShipDto extends AbstractDto {
     public String getBuildType() {
         String type = this.resources.getType();
         if ("1".equals(type)) {
-            return "大型艦建造";
+            return "LSC";
         }
-        return "通常艦建造";
+        return "Normal";
     }
 
     /**

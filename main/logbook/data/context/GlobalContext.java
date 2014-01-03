@@ -321,7 +321,7 @@ public final class GlobalContext {
 
             FileUtils.write(file, data.getJsonObject().toString());
         } catch (IOException e) {
-            LOG.warn("JSONオブジェクトを保存するに失敗しました", e);
+            LOG.warn("Failed to save the JSON object", e);
             LOG.warn(data);
         }
 
@@ -337,10 +337,10 @@ public final class GlobalContext {
                 JsonObject apidata = data.getJsonObject().getJsonObject("api_data");
                 battleList.add(new BattleDto(apidata));
 
-                addConsole("海戦情報を更新しました");
+                addConsole("Battle information updated");
             }
         } catch (Exception e) {
-            LOG.warn("海戦情報を更新しますに失敗しました", e);
+            LOG.warn("Battle information update failed", e);
             LOG.warn(data);
         }
     }
@@ -356,9 +356,9 @@ public final class GlobalContext {
             battleResultList.add(dto);
             CreateReportLogic.storeBattleResultReport(dto);
 
-            addConsole("海戦情報を更新しました");
+            addConsole("Battle information updated");
         } catch (Exception e) {
-            LOG.warn("海戦情報を更新しますに失敗しました", e);
+            LOG.warn("Battle information update failed", e);
             LOG.warn(data);
         }
     }
@@ -384,9 +384,9 @@ public final class GlobalContext {
             getShipResource.put(kdockid, resource);
             GlobalConfig.setCreateShipResource(kdockid, resource);
 
-            addConsole("建造(投入資源)情報を更新しました");
+            addConsole("Construction information updated");
         } catch (Exception e) {
-            LOG.warn("建造(投入資源)情報を更新しますに失敗しました", e);
+            LOG.warn("Construction information update failed", e);
             LOG.warn(data);
         }
     }
@@ -414,9 +414,9 @@ public final class GlobalContext {
                     GlobalConfig.setCreateShipResource(lastBuildKdock, resource);
                 }
             }
-            addConsole("建造を更新しました");
+            addConsole("Construction information updated");
         } catch (Exception e) {
-            LOG.warn("建造を更新しますに失敗しました", e);
+            LOG.warn("Construction information update failed", e);
             LOG.warn(data);
         }
     }
@@ -433,9 +433,9 @@ public final class GlobalContext {
 
             getShipQueue.add(new AwaitingDecision(shipid, dock));
 
-            addConsole("建造(入手)情報を更新しました");
+            addConsole("Construction information updated");
         } catch (Exception e) {
-            LOG.warn("建造(入手)情報を更新しますに失敗しました", e);
+            LOG.warn("Construction information update failed", e);
             LOG.warn(data);
         }
     }
@@ -461,9 +461,9 @@ public final class GlobalContext {
                 CreateReportLogic.storeCreateItemReport(item);
             }
 
-            addConsole("装備開発情報を更新しました");
+            addConsole("Craft information updated");
         } catch (Exception e) {
-            LOG.warn("装備開発情報を更新しますに失敗しました", e);
+            LOG.warn("Craft information update failed", e);
             LOG.warn(data);
         }
     }
@@ -497,9 +497,9 @@ public final class GlobalContext {
                 }
             }
 
-            addConsole("保有装備情報を更新しました");
+            addConsole("Equipment list updated");
         } catch (Exception e) {
-            LOG.warn("保有装備を更新しますに失敗しました", e);
+            LOG.warn("Equipment list update failed", e);
             LOG.warn(data);
         }
     }
@@ -545,9 +545,9 @@ public final class GlobalContext {
                 }
             }
 
-            addConsole("保有艦娘情報を更新しました");
+            addConsole("Ship information updated");
         } catch (Exception e) {
-            LOG.warn("保有艦娘を更新しますに失敗しました", e);
+            LOG.warn("Ship information update failed", e);
             LOG.warn(data);
         }
     }
@@ -591,9 +591,9 @@ public final class GlobalContext {
                 }
             }
 
-            addConsole("保有艦娘情報を更新しました");
+            addConsole("Ship information updated");
         } catch (Exception e) {
-            LOG.warn("保有艦娘を更新しますに失敗しました", e);
+            LOG.warn("Ship information update failed", e);
             LOG.warn(data);
         }
     }
@@ -613,9 +613,9 @@ public final class GlobalContext {
                 }
             }
             doDeck(apidata);
-            addConsole("艦隊を更新しました");
+            addConsole("Fleet info updated");
         } catch (Exception e) {
-            LOG.warn("艦隊を更新しますに失敗しました", e);
+            LOG.warn("Fleet info update failed", e);
             LOG.warn(data);
         }
     }
@@ -645,7 +645,8 @@ public final class GlobalContext {
 
                     if ((i == 0) && (j == 0)) {
                         if ((secretary == null) || (ship.getId() != secretary.getId())) {
-                            addConsole(ship.getName() + "(Lv" + ship.getLv() + ")" + " が秘書艦に任命されました");
+                            addConsole(ship.getName() + "(Lv" + ship.getLv() + ")"
+                                    + " has been appointed as the secretary");
                         }
                         // 秘書艦を設定
                         secretary = ship;
@@ -673,9 +674,9 @@ public final class GlobalContext {
             // 最大所有装備数
             maxSlotitem = apidata.getJsonNumber("api_max_slotitem").intValue();
 
-            addConsole("司令部を更新しました");
+            addConsole("HQ info updated");
         } catch (Exception e) {
-            LOG.warn("司令部を更新するに失敗しました", e);
+            LOG.warn("HQ info update failed", e);
             LOG.warn(data);
         }
     }
@@ -717,9 +718,9 @@ public final class GlobalContext {
                 deckMissions[i - 1] = new DeckMissionDto(name, mission, time, fleetid, ships);
             }
 
-            addConsole("遠征情報を更新しました");
+            addConsole("Expedition info updated");
         } catch (Exception e) {
-            LOG.warn("遠征を更新しますに失敗しました", e);
+            LOG.warn("Expedition info update failed", e);
             LOG.warn(data);
         }
     }
@@ -749,9 +750,9 @@ public final class GlobalContext {
 
             missionResultList.add(result);
 
-            addConsole("遠征(帰還)情報を更新しました");
+            addConsole("Expedition result info updated");
         } catch (Exception e) {
-            LOG.warn("遠征(帰還)を更新しますに失敗しました", e);
+            LOG.warn("Expedition result info update failed", e);
             LOG.warn(data);
         }
     }
@@ -778,9 +779,9 @@ public final class GlobalContext {
                 ndocks[i] = new NdockDto(id, time);
             }
 
-            addConsole("入渠情報を更新しました");
+            addConsole("Repair Dock info updated");
         } catch (Exception e) {
-            LOG.warn("入渠を更新しますに失敗しました", e);
+            LOG.warn("Repair Dock info update failed", e);
             LOG.warn(data);
         }
     }
@@ -800,7 +801,7 @@ public final class GlobalContext {
             Ship.set(id, toShipInfoDto(object));
         }
 
-        addConsole("艦娘一覧を更新しました");
+        addConsole("Ship list updated");
     }
 
     /**
