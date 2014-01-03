@@ -49,7 +49,7 @@ public final class ShipTable extends AbstractTableDialog {
     @Override
     protected void createContents() {
         final MenuItem filter = new MenuItem(this.opemenu, SWT.PUSH);
-        filter.setText("フィルター(&F)\tCtrl+F");
+        filter.setText("Filter(&F)\tCtrl+F");
         filter.setAccelerator(SWT.CTRL + 'F');
         filter.addSelectionListener(new SelectionAdapter() {
             @Override
@@ -61,7 +61,7 @@ public final class ShipTable extends AbstractTableDialog {
         // セパレータ
         new MenuItem(this.opemenu, SWT.SEPARATOR);
         final MenuItem switchdiff = new MenuItem(this.opemenu, SWT.CHECK);
-        switchdiff.setText("成長の余地を表示");
+        switchdiff.setText("Show stats potential");
         switchdiff.setSelection(specdiff);
         switchdiff.addSelectionListener(new SelectionAdapter() {
             @Override
@@ -74,7 +74,7 @@ public final class ShipTable extends AbstractTableDialog {
 
     @Override
     protected String getTitle() {
-        return "所有艦娘一覧";
+        return "Ship List";
     }
 
     @Override

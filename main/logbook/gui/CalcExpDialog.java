@@ -76,7 +76,7 @@ public final class CalcExpDialog extends Dialog {
      */
     public CalcExpDialog(Shell parent) {
         super(parent, SWT.CLOSE | SWT.TITLE | SWT.MIN | SWT.RESIZE);
-        this.setText("経験値計算機");
+        this.setText("Exp Calculator");
     }
 
     /**
@@ -108,13 +108,13 @@ public final class CalcExpDialog extends Dialog {
         this.shipcombo = new Combo(select, SWT.READ_ONLY);
         this.setShipComboData();
         Button reload = new Button(select, SWT.NONE);
-        reload.setText("更新");
+        reload.setText("Calculate");
 
         Composite plan = new Composite(this.shell, SWT.NONE);
         plan.setLayout(new GridLayout(5, false));
         plan.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
         Label label1 = new Label(plan, SWT.NONE);
-        label1.setText("今のレベル");
+        label1.setText("Current");
         this.beforelv = new Spinner(plan, SWT.BORDER);
         GridData gdBeforelv = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
         gdBeforelv.widthHint = 45;
@@ -132,7 +132,7 @@ public final class CalcExpDialog extends Dialog {
         label3.setText("Exp");
 
         Label label4 = new Label(plan, SWT.NONE);
-        label4.setText("目標レベル");
+        label4.setText("Target");
         this.afterlv = new Spinner(plan, SWT.BORDER);
         GridData gdAfterlv = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
         gdAfterlv.widthHint = 45;
@@ -153,13 +153,13 @@ public final class CalcExpDialog extends Dialog {
         plan2.setLayout(new RowLayout());
         plan2.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
         Label label7 = new Label(plan2, SWT.NONE);
-        label7.setText("海域");
+        label7.setText("Map");
         this.seacombo = new Combo(plan2, SWT.READ_ONLY);
         for (Entry<String, Integer> entry : SeaExp.get().entrySet()) {
             this.seacombo.add(entry.getKey());
         }
         Label label8 = new Label(plan2, SWT.NONE);
-        label8.setText("評価");
+        label8.setText("Rank");
         this.evalcombo = new Combo(plan2, SWT.READ_ONLY);
         for (Entry<String, Double> entry : EvaluateExp.get().entrySet()) {
             this.evalcombo.add(entry.getKey());
@@ -169,7 +169,7 @@ public final class CalcExpDialog extends Dialog {
         plan3.setLayout(new RowLayout());
         plan3.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
         this.flagbtn = new Button(plan3, SWT.CHECK);
-        this.flagbtn.setText("旗艦");
+        this.flagbtn.setText("Flagship");
         this.mvpbtn = new Button(plan3, SWT.CHECK);
         this.mvpbtn.setText("MVP");
 
@@ -182,7 +182,7 @@ public final class CalcExpDialog extends Dialog {
         result.setLayout(new GridLayout(4, false));
         result.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
         Label label10 = new Label(result, SWT.NONE);
-        label10.setText("1回あたり");
+        label10.setText("Per-sortie");
         this.getexp = new Text(result, SWT.BORDER | SWT.READ_ONLY);
         GridData gdGetexp = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
         gdGetexp.widthHint = 55;
@@ -190,13 +190,13 @@ public final class CalcExpDialog extends Dialog {
         new Label(result, SWT.NONE);
         new Label(result, SWT.NONE);
         Label label11 = new Label(result, SWT.NONE);
-        label11.setText("必要経験値");
+        label11.setText("Required");
         this.needexp = new Text(result, SWT.BORDER | SWT.READ_ONLY);
         GridData gdNeedexp = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
         gdNeedexp.widthHint = 55;
         this.needexp.setLayoutData(gdNeedexp);
         Label label12 = new Label(result, SWT.NONE);
-        label12.setText("戦闘回数");
+        label12.setText("Times");
         this.battlecount = new Text(result, SWT.BORDER | SWT.READ_ONLY);
         GridData gdBattlecount = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
         gdBattlecount.widthHint = 55;

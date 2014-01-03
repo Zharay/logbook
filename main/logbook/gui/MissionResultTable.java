@@ -34,7 +34,7 @@ public final class MissionResultTable extends AbstractTableDialog {
 
     @Override
     protected String getTitle() {
-        return "遠征報告書";
+        return "Expedition Report";
     }
 
     @Override

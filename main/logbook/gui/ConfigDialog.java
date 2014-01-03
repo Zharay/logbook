@@ -40,7 +40,7 @@ public final class ConfigDialog extends Dialog {
      */
     public ConfigDialog(Shell parent) {
         super(parent, SWT.CLOSE | SWT.TITLE | SWT.MIN | SWT.RESIZE);
-        this.setText("設定");
+        this.setText("Settings");
     }
 
     /**
@@ -71,7 +71,7 @@ public final class ConfigDialog extends Dialog {
 
         // システム タブ
         TabItem tabSystem = new TabItem(tabFolder, SWT.NONE);
-        tabSystem.setText("システム");
+        tabSystem.setText("System");
 
         Composite compositeSystem = new Composite(tabFolder, SWT.NONE);
         compositeSystem.setLayout(new GridLayout(3, false));
@@ -79,7 +79,7 @@ public final class ConfigDialog extends Dialog {
 
         Label label = new Label(compositeSystem, SWT.NONE);
         label.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-        label.setText("ポート番号*");
+        label.setText("Port*");
 
         final Text listenport = new Text(compositeSystem, SWT.BORDER);
         GridData gdListenport = new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1);
@@ -90,7 +90,7 @@ public final class ConfigDialog extends Dialog {
 
         Label label1 = new Label(compositeSystem, SWT.NONE);
         label1.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-        label1.setText("ウインドウサイズ(横)");
+        label1.setText("Window size (W)");
 
         final Text width = new Text(compositeSystem, SWT.BORDER);
         GridData gdWidth = new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1);
@@ -101,7 +101,7 @@ public final class ConfigDialog extends Dialog {
 
         Label label2 = new Label(compositeSystem, SWT.NONE);
         label2.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-        label2.setText("ウインドウサイズ(縦)");
+        label2.setText("Window size (H)");
 
         final Text height = new Text(compositeSystem, SWT.BORDER);
         GridData gdHeight = new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1);
@@ -112,7 +112,7 @@ public final class ConfigDialog extends Dialog {
 
         Label label3 = new Label(compositeSystem, SWT.NONE);
         label3.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-        label3.setText("音量(%)");
+        label3.setText("Volume (%)");
 
         final Text soundlevel = new Text(compositeSystem, SWT.BORDER);
         GridData gdSoundlevel = new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1);
@@ -123,7 +123,7 @@ public final class ConfigDialog extends Dialog {
 
         Label label7 = new Label(compositeSystem, SWT.NONE);
         label7.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-        label7.setText("透明度*");
+        label7.setText("Transparency*");
 
         final Text alpha = new Text(compositeSystem, SWT.BORDER);
         GridData gdAlpha = new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1);
@@ -134,7 +134,7 @@ public final class ConfigDialog extends Dialog {
 
         Label label8 = new Label(compositeSystem, SWT.NONE);
         label8.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-        label8.setText("報告書の保存先");
+        label8.setText("Save report to");
 
         final Text reportDir = new Text(compositeSystem, SWT.BORDER);
         GridData gdReportDir = new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1);
@@ -147,36 +147,36 @@ public final class ConfigDialog extends Dialog {
             @Override
             public void widgetSelected(SelectionEvent e) {
                 DirectoryDialog dialog = new DirectoryDialog(ConfigDialog.this.shell);
-                dialog.setMessage("保存先を指定して下さい");
+                dialog.setMessage("Please specify a location");
                 String path = dialog.open();
                 if (path != null) {
                     reportDir.setText(path);
                 }
             }
         });
-        reportSavedirBtn.setText("選択...");
+        reportSavedirBtn.setText("Select");
 
         final Button hidewindow = new Button(compositeSystem, SWT.CHECK);
         hidewindow.setLayoutData(new GridData(GridData.FILL_HORIZONTAL, SWT.CENTER, false, false, 2, 1));
-        hidewindow.setText("最小化時にタスクトレイに格納");
+        hidewindow.setText("Minimize to tray");
         hidewindow.setSelection(GlobalConfig.getHideWindow());
         new Label(compositeSystem, SWT.NONE);
 
         final Button ontop = new Button(compositeSystem, SWT.CHECK);
         ontop.setLayoutData(new GridData(GridData.FILL_HORIZONTAL, SWT.CENTER, false, false, 2, 1));
-        ontop.setText("最前面に表示する*");
+        ontop.setText("Always on top*");
         ontop.setSelection(GlobalConfig.getOnTop() != SWT.NONE);
         new Label(compositeSystem, SWT.NONE);
 
         final Button checkUpdate = new Button(compositeSystem, SWT.CHECK);
         checkUpdate.setLayoutData(new GridData(GridData.FILL_HORIZONTAL, SWT.CENTER, false, false, 2, 1));
-        checkUpdate.setText("起動時にアップデートチェック*");
+        checkUpdate.setText("Check for updates*");
         checkUpdate.setSelection(GlobalConfig.getCheckUpdate());
         new Label(compositeSystem, SWT.NONE);
 
         // キャプチャ タブ
         TabItem tabCapture = new TabItem(tabFolder, SWT.NONE);
-        tabCapture.setText("画面キャプチャ");
+        tabCapture.setText("Screenshot");
 
         Composite compositeCapture = new Composite(tabFolder, SWT.NONE);
         compositeCapture.setLayout(new GridLayout(3, false));
@@ -184,7 +184,7 @@ public final class ConfigDialog extends Dialog {
 
         Label label4 = new Label(compositeCapture, SWT.NONE);
         label4.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-        label4.setText("保存先");
+        label4.setText("Destination");
 
         final Text captureDir = new Text(compositeCapture, SWT.BORDER);
         GridData gdCaptureDir = new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1);
@@ -197,18 +197,18 @@ public final class ConfigDialog extends Dialog {
             @Override
             public void widgetSelected(SelectionEvent e) {
                 DirectoryDialog dialog = new DirectoryDialog(ConfigDialog.this.shell);
-                dialog.setMessage("保存先を指定して下さい");
+                dialog.setMessage("Please specify a location");
                 String path = dialog.open();
                 if (path != null) {
                     captureDir.setText(path);
                 }
             }
         });
-        savedirBtn.setText("選択...");
+        savedirBtn.setText("Select");
 
         Label label5 = new Label(compositeCapture, SWT.NONE);
         label5.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-        label5.setText("フォーマット");
+        label5.setText("Format");
 
         final Combo imageformatCombo = new Combo(compositeCapture, SWT.READ_ONLY);
         imageformatCombo.setItems(new String[] { "jpg", "png" });
@@ -224,7 +224,7 @@ public final class ConfigDialog extends Dialog {
 
         // Development タブ
         TabItem tabDevelopment = new TabItem(tabFolder, SWT.NONE);
-        tabDevelopment.setText("Development");
+        tabDevelopment.setText("Developer");
 
         Composite compositeDevelopment = new Composite(tabFolder, SWT.NONE);
         compositeDevelopment.setLayout(new GridLayout(2, false));
@@ -232,12 +232,12 @@ public final class ConfigDialog extends Dialog {
         new Label(compositeDevelopment, SWT.NONE);
 
         final Button btnJson = new Button(compositeDevelopment, SWT.CHECK);
-        btnJson.setText("JSONを保存する");
+        btnJson.setText("Save JSON to file");
         btnJson.setSelection(GlobalConfig.getStoreJson());
 
         Label lblJson = new Label(compositeDevelopment, SWT.NONE);
         lblJson.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-        lblJson.setText("JSON保存先");
+        lblJson.setText("Destination");
 
         final Text jsonpath = new Text(compositeDevelopment, SWT.BORDER);
         jsonpath.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
@@ -282,7 +282,7 @@ public final class ConfigDialog extends Dialog {
 
         Button cancelBtn = new Button(command, SWT.NONE);
         cancelBtn.setLayoutData(new RowData(100, SWT.DEFAULT));
-        cancelBtn.setText("キャンセル");
+        cancelBtn.setText("Cancel");
         cancelBtn.addSelectionListener(new SelectionAdapter() {
             @Override
             public void widgetSelected(SelectionEvent e) {

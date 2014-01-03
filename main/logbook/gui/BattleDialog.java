@@ -66,7 +66,7 @@ public final class BattleDialog extends Dialog {
      */
     private void createContents() {
         this.shell = new Shell(this.getParent(), this.getStyle());
-        this.shell.setText("会敵報告");
+        this.shell.setText("Drop Report");
         this.shell.setLayout(new GridLayout(1, false));
 
         Composite titleArea = new Composite(this.shell, SWT.NONE);

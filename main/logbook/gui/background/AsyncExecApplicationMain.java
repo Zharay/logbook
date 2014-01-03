@@ -116,7 +116,7 @@ public final class AsyncExecApplicationMain extends Thread {
         @Override
         public void run() {
             Button itemList = this.main.getItemList();
-            String setText = "所有装備(" + GlobalContext.getItemMap().size() + "/"
+            String setText = "Equip(" + GlobalContext.getItemMap().size() + "/"
                     + GlobalContext.maxSlotitem() + ")";
             if (!setText.equals(itemList.getText())) {
                 itemList.setText(setText);
@@ -142,7 +142,7 @@ public final class AsyncExecApplicationMain extends Thread {
         @Override
         public void run() {
             Button shipList = this.main.getShipList();
-            String setText = "所有艦娘(" + GlobalContext.getShipMap().size() + "/" + GlobalContext.maxChara()
+            String setText = "Ships(" + GlobalContext.getShipMap().size() + "/" + GlobalContext.maxChara()
                     + ")";
             if (!setText.equals(shipList.getText())) {
                 shipList.setText(setText);
@@ -188,7 +188,7 @@ public final class AsyncExecApplicationMain extends Thread {
                 if (notice.size() > 0) {
                     ToolTip tip = new ToolTip(this.main.getShell(), SWT.BALLOON
                             | SWT.ICON_INFORMATION);
-                    tip.setText("遠征・入渠");
+                    tip.setText("Notification");
                     tip.setMessage(StringUtils.join(notice, "\r\n"));
                     this.main.getTrayItem().setToolTip(tip);
                     this.main.getTabFolder().setSelection(0);
@@ -237,7 +237,7 @@ public final class AsyncExecApplicationMain extends Thread {
                         }
                         if (this.main.getDeckNotice().getSelection()) {
                             if (((rest <= ONE_MINUTES) && !FLAG_NOTICE_DECK[i])) {
-                                notice.add(dispname + " がまもなく帰投します");
+                                notice.add(dispname + " has returned from the expedition");
                                 noticeflg = true;
                                 FLAG_NOTICE_DECK[i] = true;
                             } else if (rest > ONE_MINUTES) {
@@ -248,7 +248,7 @@ public final class AsyncExecApplicationMain extends Thread {
                         }
                         time = TimeLogic.toDateRestString(rest);
                         if (time == null) {
-                            time = "まもなく帰投します";
+                            time = "Done";
                         }
                     }
                 } else {
@@ -305,7 +305,7 @@ public final class AsyncExecApplicationMain extends Thread {
                         if (this.main.getNdockNotice().getSelection()) {
 
                             if ((rest <= ONE_MINUTES) && !FLAG_NOTICE_NDOCK[i]) {
-                                notice.add(name + " がまもなくお風呂からあがります");
+                                notice.add("Repair Dock has finished repairing " + name);
                                 noticeflg = true;
                                 FLAG_NOTICE_NDOCK[i] = true;
                             } else if (rest > ONE_MINUTES) {
@@ -316,7 +316,7 @@ public final class AsyncExecApplicationMain extends Thread {
                         }
                         time = TimeLogic.toDateRestString(rest);
                         if (time == null) {
-                            time = "まもなくお風呂からあがります";
+                            time = "Done";
                         }
                     }
                 } else {
@@ -352,9 +352,9 @@ public final class AsyncExecApplicationMain extends Thread {
             // タブを更新する
             CTabItem maintab = this.main.getTabFolder().getItem(0);
             maintab.setToolTipText(
-                    "装備:" + GlobalContext.getItemMap().size() + "/"
+                    "Equip:" + GlobalContext.getItemMap().size() + "/"
                             + GlobalContext.maxSlotitem()
-                            + " 艦娘:" + GlobalContext.getShipMap().size() + "/"
+                            + " Ships:" + GlobalContext.getShipMap().size() + "/"
                             + GlobalContext.maxChara());
 
             for (int i = 0; i < 4; i++) {
@@ -486,11 +486,11 @@ public final class AsyncExecApplicationMain extends Thread {
                 stateComposite.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
                 Label condst = new Label(stateComposite, SWT.NONE);
-                condst.setText("疲");
+                condst.setText("Mo ");
                 Label fuelst = new Label(stateComposite, SWT.NONE);
-                fuelst.setText("燃");
+                fuelst.setText("Fu ");
                 Label bullst = new Label(stateComposite, SWT.NONE);
-                bullst.setText("弾");
+                bullst.setText("Am");
 
                 // 疲労
                 Label cond = new Label(this.fleetGroup, SWT.NONE);
@@ -557,33 +557,33 @@ public final class AsyncExecApplicationMain extends Thread {
 
                 // 体力メッセージ
                 if (hpratio <= GlobalConfig.BADLY_DAMAGE) {
-                    this.hpmsgLabels[i].setText("(大破)");
+                    this.hpmsgLabels[i].setText("(Heavy)");
                     this.hpmsgLabels[i].setBackground(SWTResourceManager.getColor(GlobalConfig.COND_RED_COLOR));
                     this.hpmsgLabels[i].setForeground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
                 } else if (hpratio <= GlobalConfig.HALF_DAMAGE) {
-                    this.hpmsgLabels[i].setText("(中破)");
+                    this.hpmsgLabels[i].setText("(Med)");
                     this.hpmsgLabels[i].setBackground(SWTResourceManager.getColor(GlobalConfig.COND_ORANGE_COLOR));
                     this.hpmsgLabels[i].setForeground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
                 } else if (hpratio <= GlobalConfig.SLIGHT_DAMAGE) {
-                    this.hpmsgLabels[i].setText("(小破)");
+                    this.hpmsgLabels[i].setText("(Light)");
                     this.hpmsgLabels[i].setBackground(null);
                     this.hpmsgLabels[i].setForeground(null);
                 } else {
-                    this.hpmsgLabels[i].setText("(健在)");
+                    this.hpmsgLabels[i].setText("(Good)");
                     this.hpmsgLabels[i].setBackground(null);
                     this.hpmsgLabels[i].setForeground(null);
                 }
 
                 // ステータス
                 // ステータス.疲労
-                this.condstLabels[i].setText("疲");
+                this.condstLabels[i].setText("Morale ");
                 if (cond >= 49) {
                     this.condstLabels[i].setEnabled(false);
                 } else {
                     this.condstLabels[i].setEnabled(true);
                 }
                 // ステータス.燃料
-                this.fuelstLabels[i].setText("燃");
+                this.fuelstLabels[i].setText("Fuel ");
                 if (fuelraito >= 1f) {
                     this.fuelstLabels[i].setEnabled(false);
                     this.fuelstLabels[i].setForeground(null);
@@ -596,7 +596,7 @@ public final class AsyncExecApplicationMain extends Thread {
                     }
                 }
                 // ステータス.弾
-                this.bullstLabels[i].setText("弾");
+                this.bullstLabels[i].setText("Ammo");
                 if (bullraito >= 1f) {
                     this.bullstLabels[i].setEnabled(false);
                     this.bullstLabels[i].setBackground(null);
@@ -622,7 +622,7 @@ public final class AsyncExecApplicationMain extends Thread {
                 }
 
                 this.nameLabels[i].setText(name);
-                this.nameLabels[i].setToolTipText("燃:" + ship.getFuel() + "/" + ship.getFuelMax() + " 弾:"
+                this.nameLabels[i].setToolTipText("Fuel:" + ship.getFuel() + "/" + ship.getFuelMax() + " Ammo:"
                         + ship.getBull() + "/" + ship.getBullMax() + " Next:" + ship.getNext() + "exp");
                 this.nowhpLabels[i].setText(Long.toString(nowhp));
                 this.maxhpLabels[i].setText("/" + maxhp);

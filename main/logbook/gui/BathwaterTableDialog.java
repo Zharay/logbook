@@ -57,7 +57,7 @@ public final class BathwaterTableDialog extends AbstractTableDialog {
     @Override
     protected void createContents() {
         final MenuItem removecheck = new MenuItem(this.opemenu, SWT.CHECK);
-        removecheck.setText("遠征中の艦娘を外す");
+        removecheck.setText("Filter ships on expedition");
         removecheck.setSelection(removeflg);
         removecheck.addSelectionListener(new SelectionAdapter() {
             @Override
@@ -70,7 +70,7 @@ public final class BathwaterTableDialog extends AbstractTableDialog {
 
     @Override
     protected String getTitle() {
-        return "お風呂に入りたい艦娘";
+        return "Repair Queue";
     }
 
     @Override
@@ -81,7 +81,7 @@ public final class BathwaterTableDialog extends AbstractTableDialog {
 
     @Override
     protected String[] getTableHeader() {
-        return new String[] { "", "艦娘ID", "艦隊", "疲労", "名前", "Lv", "HP", "時間", "燃料", "鋼材", "遠征" };
+        return new String[] { "", "ID", "Fleet", "Morale", "Name", "Lv", "HP", "Time", "Fuel", "Steel", "Expedition" };
     }
 
     @Override
@@ -119,7 +119,7 @@ public final class BathwaterTableDialog extends AbstractTableDialog {
                 if (removeflg) {
                     continue;
                 }
-                action = "遠征";
+                action = "Expedition";
             }
             // 整形
             body.add(new String[] {
@@ -149,7 +149,7 @@ public final class BathwaterTableDialog extends AbstractTableDialog {
                     item.setBackground(SWTResourceManager.getColor(GlobalConfig.ROW_BACKGROUND));
                 }
                 item.setText(text);
-                if (text[text.length - 1].equals("遠征")) {
+                if (text[text.length - 1].equals("Expedition")) {
                     item.setForeground(SWTResourceManager.getColor(GlobalConfig.MISSION_COLOR));
                 }
                 return item;
@@ -164,7 +164,7 @@ public final class BathwaterTableDialog extends AbstractTableDialog {
             public void widgetSelected(SelectionEvent e) {
                 if (e.getSource() instanceof TableColumn) {
                     TableColumn column = (TableColumn) e.getSource();
-                    if ("時間".equals(column.getText())) {
+                    if ("Time".equals(column.getText())) {
                         // "時間"がクリックされた場合
                         BathwaterTableDialog.this.sortTableItems(0, column);
                     } else {

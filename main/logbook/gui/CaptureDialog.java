@@ -68,7 +68,7 @@ public final class CaptureDialog extends Dialog {
      */
     public CaptureDialog(Shell parent) {
         super(parent, SWT.CLOSE | SWT.TITLE | SWT.MIN | SWT.RESIZE);
-        this.setText("キャプチャ");
+        this.setText("Capture");
     }
 
     /**
@@ -127,10 +127,10 @@ public final class CaptureDialog extends Dialog {
         GridData gdText = new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1);
         gdText.widthHint = 120;
         this.text.setLayoutData(gdText);
-        this.text.setText("範囲が未設定です");
+        this.text.setText("Range not set");
 
         Button button = new Button(rangeComposite, SWT.NONE);
-        button.setText("範囲を選択");
+        button.setText("Set");
         button.addSelectionListener(new SelectRectangleAdapter());
 
         // コンポジット
@@ -148,7 +148,7 @@ public final class CaptureDialog extends Dialog {
                         CaptureDialog.this.interval.getSelection()));
             }
         });
-        this.interval.setText("周期");
+        this.interval.setText("Interval");
 
         this.intervalms = new Spinner(this.composite, SWT.BORDER);
         this.intervalms.setMaximum(60000);
@@ -157,7 +157,7 @@ public final class CaptureDialog extends Dialog {
         this.intervalms.setIncrement(100);
 
         Label label = new Label(this.composite, SWT.NONE);
-        label.setText("ミリ秒");
+        label.setText("ms");
 
         this.capture = new Button(this.shell, SWT.NONE);
         this.capture.setFont(this.font);
@@ -181,11 +181,11 @@ public final class CaptureDialog extends Dialog {
      */
     private static String getCaptureButtonText(boolean isrunning, boolean interval) {
         if (isrunning && interval) {
-            return "停 止";
+            return "Stop";
         } else if (interval) {
-            return "開 始";
+            return "Start";
         } else {
-            return "キャプチャ";
+            return "Capture";
         }
     }
 
@@ -329,7 +329,7 @@ public final class CaptureDialog extends Dialog {
                     }
                 } while (this.interval);
             } catch (Exception e) {
-                LOG.warn("キャプチャ中に例外が発生しました", e);
+                LOG.warn("An exception occurred during capture", e);
             }
         }
 

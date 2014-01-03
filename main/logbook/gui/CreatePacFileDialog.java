@@ -78,7 +78,7 @@ public final class CreatePacFileDialog extends Dialog {
      */
     private void createContents() {
         this.shell = new Shell(this.getParent(), this.getStyle());
-        this.shell.setText("自動プロキシ構成スクリプトファイル生成");
+        this.shell.setText("PAC File Generator");
         this.shell.setLayout(new GridLayout(1, false));
 
         Composite composite = new Composite(this.shell, SWT.NONE);
@@ -86,17 +86,17 @@ public final class CreatePacFileDialog extends Dialog {
         composite.setLayout(new GridLayout(1, false));
 
         Label labelTitle = new Label(composite, SWT.NONE);
-        labelTitle.setText("自動プロキシ構成スクリプトファイルを生成します");
+        labelTitle.setText("This program is used to generate proxy auto-config (PAC) file which can be utilized by browsers to provide seamless proxy switching.");
 
         String server = Filter.getServerName();
         if (server == null) {
             Group manualgroup = new Group(composite, SWT.NONE);
             manualgroup.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
             manualgroup.setLayout(new GridLayout(2, false));
-            manualgroup.setText("鎮守府サーバーが未検出です。IPアドレスを入力して下さい。");
+            manualgroup.setText("Server IP address not detected");
 
             Label iplabel = new Label(manualgroup, SWT.NONE);
-            iplabel.setText("IPアドレス:");
+            iplabel.setText("IP Address:");
 
             final Text text = new Text(manualgroup, SWT.BORDER);
             GridData gdip = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
@@ -116,16 +116,16 @@ public final class CreatePacFileDialog extends Dialog {
         }
 
         Button storeButton = new Button(composite, SWT.NONE);
-        storeButton.setText("保存先を選択...");
+        storeButton.setText("Save as...");
         storeButton.addSelectionListener(new FileSelectionAdapter(this));
 
         Group addrgroup = new Group(composite, SWT.NONE);
         addrgroup.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
         addrgroup.setLayout(new GridLayout(2, false));
-        addrgroup.setText("アドレス(保存先のアドレスより生成されます)");
+        addrgroup.setText("PAC File Path");
 
         Label ieAddrLabel = new Label(addrgroup, SWT.NONE);
-        ieAddrLabel.setText("IE用:");
+        ieAddrLabel.setText("Internet Explorer:");
 
         this.iePath = new Text(addrgroup, SWT.BORDER);
         GridData gdIePath = new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1);
@@ -133,7 +133,7 @@ public final class CreatePacFileDialog extends Dialog {
         this.iePath.setLayoutData(gdIePath);
 
         Label fxAddrLabel = new Label(addrgroup, SWT.NONE);
-        fxAddrLabel.setText("Firefox用:");
+        fxAddrLabel.setText("Firefox:");
 
         this.firefoxPath = new Text(addrgroup, SWT.BORDER);
         GridData gdFxPath = new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1);
@@ -172,9 +172,9 @@ public final class CreatePacFileDialog extends Dialog {
             if (filename != null) {
 
                 MessageBox messageBox = new MessageBox(this.shell, SWT.ICON_INFORMATION);
-                messageBox.setText("成功");
-                messageBox.setMessage("自動プロキシ構成スクリプトファイルを生成しました。\r\n"
-                        + "次にブラウザの設定を行って下さい。");
+                messageBox.setText("Information");
+                messageBox.setMessage("PAC file is successfully generated.\r\n"
+                        + "Please configure your browser.");
                 messageBox.open();
 
                 String script = MessageFormat.format(CreatePacFileDialog.SCRIPT,
@@ -193,7 +193,7 @@ public final class CreatePacFileDialog extends Dialog {
                     FileUtils.write(file, script);
                 } catch (IOException e1) {
                     MessageBox errMessageBox = new MessageBox(this.shell, SWT.ICON_ERROR);
-                    errMessageBox.setText("書き込めませんでした");
+                    errMessageBox.setText("Write error");
                     errMessageBox.setMessage(e1.toString());
                     errMessageBox.open();
                 }

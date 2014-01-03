@@ -136,7 +136,7 @@ public final class FullScreenDialog extends Dialog {
             gc.setFont(this.largefont);
             gc.setForeground(this.black);
             gc.setBackground(this.white);
-            gc.drawString("キャプチャする領域をマウスでドラッグして下さい。 [Esc]キーでキャンセル", 2, 2);
+            gc.drawString("Drag the mouse on the area you want to capture. Pres [Esc] to cancel.", 2, 2);
         }
 
         @Override
@@ -189,8 +189,8 @@ public final class FullScreenDialog extends Dialog {
                 // 範囲が十分ある場合
                 if ((rectangle.width > 2) && (rectangle.height > 2)) {
                     MessageBox msg = new MessageBox(this.getShell(), SWT.YES | SWT.NO | SWT.ICON_QUESTION);
-                    msg.setText("矩形選択");
-                    msg.setMessage("この範囲でよろしいですか？");
+                    msg.setText("Information");
+                    msg.setMessage("Are you sure?");
                     if (msg.open() == SWT.YES) {
                         this.getShell().close();
                         return;

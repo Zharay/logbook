@@ -24,14 +24,14 @@ public class TimeLogic {
     public static String toDateRestString(long rest) {
         if (rest > 0) {
             if (rest > ONE_DAY) {
-                return (rest / ONE_DAY) + "日" + ((rest % ONE_DAY) / ONE_HOUR) + "時間"
-                        + ((rest % ONE_HOUR) / ONE_MINUTES) + "分";
+                return (rest / ONE_DAY) + "d" + ((rest % ONE_DAY) / ONE_HOUR) + "h"
+                        + ((rest % ONE_HOUR) / ONE_MINUTES) + "m";
             } else if (rest > ONE_HOUR) {
-                return (rest / ONE_HOUR) + "時間" + ((rest % ONE_HOUR) / ONE_MINUTES) + "分";
+                return (rest / ONE_HOUR) + "h" + ((rest % ONE_HOUR) / ONE_MINUTES) + "m";
             } else if (rest > ONE_MINUTES) {
-                return (rest / ONE_MINUTES) + "分" + (rest % ONE_MINUTES) + "秒";
+                return (rest / ONE_MINUTES) + "m" + (rest % ONE_MINUTES) + "s";
             } else {
-                return rest + "秒";
+                return rest + "s";
             }
         } else {
             return null;

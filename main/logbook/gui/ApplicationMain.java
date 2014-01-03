@@ -174,7 +174,7 @@ public final class ApplicationMain {
 
         final Display display = Display.getDefault();
         this.shell = new Shell(SWT.CLOSE | SWT.TITLE | SWT.MIN | SWT.RESIZE | GlobalConfig.getOnTop());
-        this.shell.setText("航海日誌 " + GlobalConfig.VERSION);
+        this.shell.setText("logbook " + GlobalConfig.VERSION);
         this.shell.setAlpha(GlobalConfig.getAlpha());
         GridLayout glShell = new GridLayout(1, false);
         glShell.horizontalSpacing = 1;
@@ -192,8 +192,8 @@ public final class ApplicationMain {
 
                 MessageBox box = new MessageBox(ApplicationMain.this.shell, SWT.YES | SWT.NO
                         | SWT.ICON_QUESTION);
-                box.setText("終了の確認");
-                box.setMessage("航海日誌を終了しますか？");
+                box.setText("logbook");
+                box.setMessage("Are you sure you want to exit logbook?");
                 if (box.open() == SWT.YES) {
                     e.doit = true;
                 } else {
@@ -206,75 +206,75 @@ public final class ApplicationMain {
         Menu menubar = new Menu(this.shell, SWT.BAR);
         this.shell.setMenuBar(menubar);
         MenuItem cmdmenuroot = new MenuItem(menubar, SWT.CASCADE);
-        cmdmenuroot.setText("コマンド");
+        cmdmenuroot.setText("&Action");
         Menu cmdmenu = new Menu(cmdmenuroot);
         cmdmenuroot.setMenu(cmdmenu);
         MenuItem calcmenuroot = new MenuItem(menubar, SWT.CASCADE);
-        calcmenuroot.setText("計算機");
+        calcmenuroot.setText("&Calc");
         Menu calcmenu = new Menu(calcmenuroot);
         calcmenuroot.setMenu(calcmenu);
         MenuItem etcroot = new MenuItem(menubar, SWT.CASCADE);
-        etcroot.setText("その他");
+        etcroot.setText("&Other");
         Menu etcmenu = new Menu(etcroot);
         etcroot.setMenu(etcmenu);
 
         // メニュー
         // コマンド-キャプチャ
         MenuItem capture = new MenuItem(cmdmenu, SWT.NONE);
-        capture.setText("キャプチャ(&C)");
+        capture.setText("&Capture");
         capture.addSelectionListener(new CaptureDialogAdapter(this.shell));
         // セパレータ
         new MenuItem(cmdmenu, SWT.SEPARATOR);
         // コマンド-ドロップ報告書
         MenuItem cmddrop = new MenuItem(cmdmenu, SWT.NONE);
-        cmddrop.setText("ドロップ報告書(&D)\tCtrl+D");
+        cmddrop.setText("&Drop Report\tCtrl+D");
         cmddrop.setAccelerator(SWT.CTRL + 'D');
         cmddrop.addSelectionListener(new DropReportAdapter(this.shell));
         // コマンド-建造報告書
         MenuItem cmdcreateship = new MenuItem(cmdmenu, SWT.NONE);
-        cmdcreateship.setText("建造報告書(&B)\tCtrl+B");
+        cmdcreateship.setText("&Build Report\tCtrl+B");
         cmdcreateship.setAccelerator(SWT.CTRL + 'B');
         cmdcreateship.addSelectionListener(new CreateShipReportAdapter(this.shell));
         // コマンド-開発報告書
         MenuItem cmdcreateitem = new MenuItem(cmdmenu, SWT.NONE);
-        cmdcreateitem.setText("開発報告書(&E)\tCtrl+E");
-        cmdcreateitem.setAccelerator(SWT.CTRL + 'E');
+        cmdcreateitem.setText("Craft &Report\tCtrl+R");
+        cmdcreateitem.setAccelerator(SWT.CTRL + 'R');
         cmdcreateitem.addSelectionListener(new CreateItemReportAdapter(this.shell));
         // コマンド-遠征報告書
         MenuItem cmdmissionresult = new MenuItem(cmdmenu, SWT.NONE);
-        cmdmissionresult.setText("遠征報告書(&M)\tCtrl+M");
-        cmdmissionresult.setAccelerator(SWT.CTRL + 'M');
+        cmdmissionresult.setText("E&xpedition Report\tCtrl+X");
+        cmdmissionresult.setAccelerator(SWT.CTRL + 'X');
         cmdmissionresult.addSelectionListener(new MissionResultReportAdapter(this.shell));
         // セパレータ
         new MenuItem(cmdmenu, SWT.SEPARATOR);
         // コマンド-所有装備一覧
         MenuItem cmditemlist = new MenuItem(cmdmenu, SWT.NONE);
-        cmditemlist.setText("所有装備一覧(&I)\tCtrl+I");
-        cmditemlist.setAccelerator(SWT.CTRL + 'I');
+        cmditemlist.setText("&Equip\tCtrl+E");
+        cmditemlist.setAccelerator(SWT.CTRL + 'E');
         cmditemlist.addSelectionListener(new ItemListReportAdapter(this.shell));
         // コマンド-所有艦娘一覧
         MenuItem cmdshiplist = new MenuItem(cmdmenu, SWT.NONE);
-        cmdshiplist.setText("所有艦娘一覧(&S)\tCtrl+S");
+        cmdshiplist.setText("&Ships\tCtrl+S");
         cmdshiplist.setAccelerator(SWT.CTRL + 'S');
         cmdshiplist.addSelectionListener(new ShipListReportAdapter(this.shell));
         // セパレータ
         new MenuItem(cmdmenu, SWT.SEPARATOR);
         // コマンド-お風呂に入りたい艦娘
         MenuItem cmdbathwaterlist = new MenuItem(cmdmenu, SWT.NONE);
-        cmdbathwaterlist.setText("お風呂に入りたい艦娘(&N)\tCtrl+N");
-        cmdbathwaterlist.setAccelerator(SWT.CTRL + 'N');
+        cmdbathwaterlist.setText("&Repair Queue\tCtrl+R");
+        cmdbathwaterlist.setAccelerator(SWT.CTRL + 'R');
         cmdbathwaterlist.addSelectionListener(new BathwaterTableAdapter(this.shell));
         // セパレータ
         new MenuItem(cmdmenu, SWT.SEPARATOR);
         // 表示-縮小表示
         final MenuItem dispsize = new MenuItem(cmdmenu, SWT.CHECK);
-        dispsize.setText("縮小表示(&M)\tCtrl+M");
+        dispsize.setText("Mini-size(&M)\tCtrl+M");
         dispsize.setAccelerator(SWT.CTRL + 'M');
         // セパレータ
         new MenuItem(cmdmenu, SWT.SEPARATOR);
         // 終了
         final MenuItem dispose = new MenuItem(cmdmenu, SWT.NONE);
-        dispose.setText("終了(&X)");
+        dispose.setText("&Close");
         dispose.addSelectionListener(new SelectionAdapter() {
             @Override
             public void widgetSelected(SelectionEvent e) {
@@ -284,17 +284,17 @@ public final class ApplicationMain {
 
         // 計算機-経験値計算
         MenuItem calcexp = new MenuItem(calcmenu, SWT.NONE);
-        calcexp.setText("経験値計算機(&C)\tCtrl+C");
+        calcexp.setText("&Exp Calc\tCtrl+C");
         calcexp.setAccelerator(SWT.CTRL + 'C');
         calcexp.addSelectionListener(new CalcExpAdapter(this.shell));
 
         // ヘルプ-設定
         MenuItem config = new MenuItem(etcmenu, SWT.NONE);
-        config.setText("設定(&P)");
+        config.setText("&Settings");
         config.addSelectionListener(new ConfigDialogAdapter(this.shell));
         // ヘルプ-自動プロキシ構成スクリプトファイル生成
         MenuItem pack = new MenuItem(etcmenu, SWT.NONE);
-        pack.setText("自動プロキシ構成スクリプト");
+        pack.setText("&PAC File Generator");
         pack.addSelectionListener(new SelectionAdapter() {
             @Override
             public void widgetSelected(SelectionEvent e) {
@@ -303,7 +303,7 @@ public final class ApplicationMain {
         });
         // ヘルプ-バージョン情報
         MenuItem version = new MenuItem(etcmenu, SWT.NONE);
-        version.setText("バージョン情報(&A)");
+        version.setText("&About");
         version.addSelectionListener(new HelpEventListener(this.shell));
 
         // シェルイベント
@@ -319,10 +319,10 @@ public final class ApplicationMain {
         this.commandComposite.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
         this.itemList = new Button(this.commandComposite, SWT.PUSH);
-        this.itemList.setText("所有装備(0/0)");
+        this.itemList.setText("Equip(0/0)");
         this.itemList.addSelectionListener(new ItemListReportAdapter(this.shell));
         this.shipList = new Button(this.commandComposite, SWT.PUSH);
-        this.shipList.setText("所有艦娘(0/0)");
+        this.shipList.setText("Ships(0/0)");
         this.shipList.addSelectionListener(new ShipListReportAdapter(this.shell));
 
         // タブフォルダー
@@ -338,7 +338,7 @@ public final class ApplicationMain {
         CTabItem mainItem = new CTabItem(this.tabFolder, SWT.NONE);
         mainItem.setFont(SWTResourceManager.getBoldFont(this.shell.getFont()));
         this.tabFolder.setSelection(mainItem);
-        mainItem.setText("母港");
+        mainItem.setText("HQ");
 
         // メインコンポジット
         this.mainComposite = new Composite(this.tabFolder, SWT.NONE);
@@ -355,7 +355,7 @@ public final class ApplicationMain {
 
         // 遠征
         this.deckGroup = new Group(this.mainComposite, SWT.NONE);
-        this.deckGroup.setText("遠征");
+        this.deckGroup.setText("Expedition");
         this.deckGroup.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
         GridLayout glDeckGroup = new GridLayout(2, false);
         glDeckGroup.verticalSpacing = 1;
@@ -375,7 +375,7 @@ public final class ApplicationMain {
                 GlobalConfig.setNoticeDeckmission(ApplicationMain.this.deckNotice.getSelection());
             }
         });
-        this.deckNotice.setText("1分前に通知する");
+        this.deckNotice.setText("Notify me 1 minute early");
 
         this.deck1name = new Label(this.deckGroup, SWT.NONE);
         this.deck1name.setText("ここに艦隊2の艦隊名が入ります");
@@ -409,7 +409,7 @@ public final class ApplicationMain {
 
         // 入渠
         this.ndockGroup = new Group(this.mainComposite, SWT.NONE);
-        this.ndockGroup.setText("入渠");
+        this.ndockGroup.setText("Repair Dock");
         this.ndockGroup.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
         GridLayout glNdockGroup = new GridLayout(2, false);
         glNdockGroup.verticalSpacing = 1;
@@ -423,7 +423,7 @@ public final class ApplicationMain {
         this.ndockNotice = new Button(this.ndockGroup, SWT.CHECK);
         this.ndockNotice.setSelection(GlobalConfig.getNoticeNdock());
         this.ndockNotice.setLayoutData(new GridData(GridData.FILL_HORIZONTAL, SWT.CENTER, false, false, 2, 1));
-        this.ndockNotice.setText("1分前に通知する");
+        this.ndockNotice.setText("Notify me 1 minute early");
         this.ndockNotice.addSelectionListener(new SelectionAdapter() {
             @Override
             public void widgetSelected(SelectionEvent e) {

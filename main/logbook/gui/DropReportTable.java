@@ -46,7 +46,7 @@ public final class DropReportTable extends AbstractTableDialog {
 
     @Override
     protected String getTitle() {
-        return "ドロップ報告書";
+        return "Drop Report";
     }
 
     @Override
