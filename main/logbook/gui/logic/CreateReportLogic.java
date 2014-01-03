@@ -117,7 +117,7 @@ public final class CreateReportLogic {
             }
 
             // 疲労
-            int cond = Integer.parseInt(text[3]);
+            int cond = Integer.parseInt(text[5]);
             if (cond <= GlobalConfig.COND_RED) {
                 item.setForeground(SWTResourceManager.getColor(GlobalConfig.COND_RED_COLOR));
             } else if (cond <= GlobalConfig.COND_ORANGE) {
@@ -253,8 +253,7 @@ public final class CreateReportLogic {
      * @return ヘッダー
      */
     public static String[] getCreateShipHeader() {
-        return new String[] { "", "Time", "Craft Type", "Name", "Type", "Fuel", "Ammo", "Steel", "Bauxite",
-                "Dev Material", "空きドック", "Secretary", "HQ Lv" };
+        return new String[] { "", "Time", "Craft Type", "Name", "Type", "Fuel", "Ammo", "Steel", "Bauxite", "Dev Material", "空きドック", "Secretary", "HQ Lv" };
     }
 
     /**
@@ -311,8 +310,7 @@ public final class CreateReportLogic {
      * @return ヘッダー
      */
     public static String[] getItemListHeader() {
-        return new String[] { "", "Name", "Type", "Qty", "Firepower", "Accuracy", "Evasion", "Range", "Luck", "Bomber",
-                "Torpedo", "LOS", "ASW", "AA" };
+        return new String[] { "", "Name", "Type", "Qty", "Firepower", "Accuracy", "Evasion", "Range", "Luck", "Bomber", "Torpedo", "LOS", "ASW", "AA" };
     }
 
     /**
@@ -363,9 +361,8 @@ public final class CreateReportLogic {
      * @return ヘッダー
      */
     public static String[] getShipListHeader() {
-        return new String[] { "", "ID", "Fleet", "Morale", "Name", "Type", "Lv", "Next", "Exp", "HP", "Equip1",
-                "Equip2", "Equip3",
-                "Equip4", "Firepower", "Torpedo", "AA", "Armor", "Evasion", "ASW", "LOS", "Luck" };
+        return new String[] { "", "ID", "Fleet", "Name", "Type", "Morale", "Recovery", "Lv", "Next", "Exp", "Air Superiority", "Equipment 1", "Equipment 2",
+                "Equipment 3", "Equipment 4", "HP", "Firepower", "Torpedo", "AA", "Armor", "Evasion", "ASW", "LOS", "Luck" };
     }
 
     /**
@@ -394,17 +391,19 @@ public final class CreateReportLogic {
                         count,
                         ship.getId(),
                         ship.getFleetid(),
-                        ship.getCond(),
                         ship.getName(),
                         ship.getType(),
+                        ship.getCond(),
+                        ship.getCondClearDate(),
                         ship.getLv(),
                         ship.getNext(),
                         ship.getExp(),
-                        ship.getMaxhp(),
+                        ship.getSeiku(),
                         ship.getSlot().get(0),
                         ship.getSlot().get(1),
                         ship.getSlot().get(2),
                         ship.getSlot().get(3),
+                        ship.getMaxhp(),
                         ship.getKaryoku(),
                         ship.getRaisou(),
                         ship.getTaiku(),
@@ -446,17 +445,19 @@ public final class CreateReportLogic {
                         count,
                         ship.getId(),
                         ship.getFleetid(),
-                        ship.getCond(),
                         ship.getName(),
                         ship.getType(),
+                        ship.getCond(),
+                        ship.getCondClearDate(),
                         ship.getLv(),
                         ship.getNext(),
                         ship.getExp(),
-                        ship.getMaxhp(),
+                        ship.getSeiku(),
                         ship.getSlot().get(0),
                         ship.getSlot().get(1),
                         ship.getSlot().get(2),
                         ship.getSlot().get(3),
+                        ship.getMaxhp(),
                         karyoku,
                         raisou,
                         taiku,
@@ -485,8 +486,7 @@ public final class CreateReportLogic {
      * 
      * @return 遠征結果
      */
-    public static List<String[]> getMissionResultBody() {
-        List<MissionResultDto> resultlist = GlobalContext.getMissionResultList();
+    public static List<String[]> getMissionResultBody(List<MissionResultDto> resultlist) {
         List<Object[]> body = new ArrayList<Object[]>();
 
         for (int i = 0; i < resultlist.size(); i++) {
@@ -667,6 +667,16 @@ public final class CreateReportLogic {
                 return false;
             }
         }
+        if (!filter.landingship) {
+            if ("揚陸艦".equals(ship.getType())) {
+                return false;
+            }
+        }
+        if (!filter.armoredcarrier) {
+            if ("装甲空母".equals(ship.getType())) {
+                return false;
+            }
+        }
         // 装備でフィルタ
         if (!StringUtils.isEmpty(filter.itemname)) {
             List<ItemDto> item = ship.getItem();
@@ -719,12 +729,7 @@ public final class CreateReportLogic {
         try {
             List<BattleResultDto> dtoList = Collections.singletonList(dto);
 
-            File report = new File(FilenameUtils.concat(GlobalConfig.getReportPath(), "Drop Report.csv"));
-
-            if (isLocked(report)) {
-                // ロックされている場合は代替ファイルに書き込みます
-                report = new File(FilenameUtils.concat(GlobalConfig.getReportPath(), "Drop Report2.csv"));
-            }
+            File report = getStoreFile("Drop Report.csv", "Drop Report2.csv");
 
             CreateReportLogic.writeCsvStripFirstColumn(report,
                     CreateReportLogic.getBattleResultStoreHeader(),
@@ -743,12 +748,7 @@ public final class CreateReportLogic {
         try {
             List<GetShipDto> dtoList = Collections.singletonList(dto);
 
-            File report = new File(FilenameUtils.concat(GlobalConfig.getReportPath(), "Build Report.csv"));
-
-            if (isLocked(report)) {
-                // ロックされている場合は代替ファイルに書き込みます
-                report = new File(FilenameUtils.concat(GlobalConfig.getReportPath(), "Build Report2.csv"));
-            }
+            File report = getStoreFile("Build Report.csv", "Build Report2.csv");
 
             CreateReportLogic.writeCsvStripFirstColumn(report,
                     CreateReportLogic.getCreateShipHeader(),
@@ -767,12 +767,7 @@ public final class CreateReportLogic {
         try {
             List<CreateItemDto> dtoList = Collections.singletonList(dto);
 
-            File report = new File(FilenameUtils.concat(GlobalConfig.getReportPath(), "Craft Report.csv"));
-
-            if (isLocked(report)) {
-                // ロックされている場合は代替ファイルに書き込みます
-                report = new File(FilenameUtils.concat(GlobalConfig.getReportPath(), "Craft Report2.csv"));
-            }
+            File report = getStoreFile("Craft Report.csv", "Craft Report2.csv");
 
             CreateReportLogic.writeCsvStripFirstColumn(report,
                     CreateReportLogic.getCreateItemHeader(),
@@ -780,6 +775,47 @@ public final class CreateReportLogic {
         } catch (IOException e) {
             LOG.warn("Write error", e);
         }
+    }
+
+    /**
+     * 遠征報告書を書き込む
+     * 
+     * @param dto 遠征結果
+     */
+    public static void storeCreateMissionReport(MissionResultDto dto) {
+        try {
+            List<MissionResultDto> dtoList = Collections.singletonList(dto);
+
+            File report = getStoreFile("Expedition Report.csv", "Expedition Report2.csv");
+
+            CreateReportLogic.writeCsvStripFirstColumn(report,
+                    CreateReportLogic.getCreateMissionResultHeader(),
+                    CreateReportLogic.getMissionResultBody(dtoList), true);
+        } catch (IOException e) {
+            LOG.warn("Write error", e);
+        }
+    }
+
+    /**
+     * 書き込み先のファイルを返します
+     * 
+     * @param name ファイル名
+     * @param altername 代替ファイル名
+     * @return File
+     * @throws IOException
+     */
+    private static File getStoreFile(String name, String altername) throws IOException {
+        // 報告書の保存先にファイルを保存します
+        File report = new File(FilenameUtils.concat(GlobalConfig.getReportPath(), name));
+        if ((report.getParentFile() == null) && report.mkdirs()) {
+            // 報告書の保存先ディレクトリが無く、ディレクトリの作成に失敗した場合はカレントフォルダにファイルを保存
+            report = new File(name);
+        }
+        if (isLocked(report)) {
+            // ロックされている場合は代替ファイルに書き込みます
+            report = new File(FilenameUtils.concat(report.getParent(), altername));
+        }
+        return report;
     }
 
     /**

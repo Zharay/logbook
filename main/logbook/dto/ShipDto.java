@@ -5,7 +5,9 @@
  */
 package logbook.dto;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
@@ -23,6 +25,12 @@ import logbook.internal.Ship;
  *
  */
 public final class ShipDto extends AbstractDto {
+
+    /** 日付フォーマット */
+    private static final SimpleDateFormat FORMAT = new SimpleDateFormat("HH:mm");
+
+    /** 日時 */
+    private final Calendar time = Calendar.getInstance();
 
     /** 艦娘個人を識別するID */
     private final long id;
@@ -77,6 +85,9 @@ public final class ShipDto extends AbstractDto {
 
     /** 装備 */
     private final List<Long> slot;
+
+    /** 装備の搭載数 */
+    private final List<Integer> onslot;
 
     /** 火力 */
     private final long karyoku;
@@ -160,10 +171,16 @@ public final class ShipDto extends AbstractDto {
         this.nowhp = object.getJsonNumber("api_nowhp").longValue();
         this.maxhp = object.getJsonNumber("api_maxhp").longValue();
         this.slot = new ArrayList<Long>();
-        JsonArray array = object.getJsonArray("api_slot");
-        for (JsonValue jsonValue : array) {
+        JsonArray slot = object.getJsonArray("api_slot");
+        for (JsonValue jsonValue : slot) {
             JsonNumber itemid = (JsonNumber) jsonValue;
             this.slot.add(Long.valueOf(itemid.longValue()));
+        }
+        this.onslot = new ArrayList<Integer>();
+        JsonArray onslot = object.getJsonArray("api_onslot");
+        for (JsonValue jsonValue : onslot) {
+            JsonNumber itemid = (JsonNumber) jsonValue;
+            this.onslot.add(Integer.valueOf(itemid.intValue()));
         }
         this.karyoku = ((JsonNumber) object.getJsonArray("api_karyoku").get(0)).longValue();
         this.karyokuMax = ((JsonNumber) object.getJsonArray("api_karyoku").get(1)).longValue();
@@ -181,6 +198,10 @@ public final class ShipDto extends AbstractDto {
         this.sakutekiMax = ((JsonNumber) object.getJsonArray("api_sakuteki").get(1)).longValue();
         this.lucky = ((JsonNumber) object.getJsonArray("api_lucky").get(0)).longValue();
         this.luckyMax = ((JsonNumber) object.getJsonArray("api_lucky").get(1)).longValue();
+        // 疲労が抜ける時間を計算する
+        if (this.cond < 49) {
+            this.time.add(Calendar.MINUTE, Math.max(49 - (int) this.cond, 3));
+        }
     }
 
     /**
@@ -354,6 +375,33 @@ public final class ShipDto extends AbstractDto {
     }
 
     /**
+     * @return 制空値
+     */
+    public int getSeiku() {
+        List<ItemDto> items = this.getItem();
+        int seiku = 0;
+        for (int i = 0; i < 4; i++) {
+            ItemDto item = items.get(i);
+            if (item != null) {
+                switch (item.getTypeId()) {
+                case "6":
+                case "7":
+                case "8":
+                case "9":
+                case "10":
+                case "21":
+                case "22":
+                    seiku += (int) Math.floor(item.getTyku() * Math.sqrt(this.onslot.get(i)));
+                    break;
+                default:
+                    break;
+                }
+            }
+        }
+        return seiku;
+    }
+
+    /**
      * @return 火力
      */
     public long getKaryoku() {
@@ -482,5 +530,15 @@ public final class ShipDto extends AbstractDto {
             next = Long.toString(nextLvExp - this.exp);
         }
         return next;
+    }
+
+    /**
+     * @return 疲労が抜けるまでの時間
+     */
+    public String getCondClearDate() {
+        if (this.cond < 49) {
+            return FORMAT.format(this.time.getTime());
+        }
+        return "";
     }
 }
