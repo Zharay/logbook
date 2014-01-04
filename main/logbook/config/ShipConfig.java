@@ -85,6 +85,11 @@ public class ShipConfig {
             if ("".equals(name)) {
                 continue;
             }
+            ShipInfoDto d = Ship.get(key.toString());
+            if (d != null) {
+                name = d.getName();
+                type = d.getType();
+            }
 
             ShipInfoDto ship = new ShipInfoDto(name, type, flagship, afterlv, maxBull, maxFuel);
 

@@ -798,7 +798,7 @@ public final class GlobalContext {
 
             String id = object.getJsonNumber("api_id").toString();
 
-            Ship.set(id, toShipInfoDto(object));
+            Ship.set(id, toShipInfoDto(object, id));
         }
 
         addConsole("Ship list updated");
@@ -810,7 +810,7 @@ public final class GlobalContext {
      * @param object
      * @return
      */
-    private static ShipInfoDto toShipInfoDto(JsonObject object) {
+    private static ShipInfoDto toShipInfoDto(JsonObject object, String id) {
         String name = object.getString("api_name");
 
         if ("なし".equals(name)) {
@@ -818,6 +818,11 @@ public final class GlobalContext {
         }
 
         String type = ShipStyle.get(object.getJsonNumber("api_stype").toString());
+        ShipInfoDto d = Ship.get(id);
+        if (d != null) {
+            name = d.getName();
+            type = d.getType();
+        }
         String flagship = object.getString("api_yomi");
         if ("-".equals(flagship)) {
             flagship = "";
