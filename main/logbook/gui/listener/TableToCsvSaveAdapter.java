@@ -63,8 +63,8 @@ public final class TableToCsvSaveAdapter extends SelectionAdapter {
             File file = new File(filename);
             if (file.exists()) {
                 MessageBox messageBox = new MessageBox(this.shell, SWT.YES | SWT.NO);
-                messageBox.setText("確認");
-                messageBox.setMessage("指定されたファイルは存在します。\n上書きしますか？");
+                messageBox.setText("logbook");
+                messageBox.setMessage(filename + " already exists.\nDo you want to overwrite it?");
                 if (messageBox.open() == SWT.NO) {
                     return;
                 }
@@ -83,7 +83,7 @@ public final class TableToCsvSaveAdapter extends SelectionAdapter {
                 CreateReportLogic.writeCsv(file, this.header, body, false);
             } catch (IOException e) {
                 MessageBox messageBox = new MessageBox(this.shell, SWT.ICON_ERROR);
-                messageBox.setText("書き込めませんでした");
+                messageBox.setText("Write error");
                 messageBox.setMessage(e.toString());
                 messageBox.open();
             }

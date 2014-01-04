@@ -94,18 +94,18 @@ public abstract class AbstractTableDialog extends Dialog {
         this.table.setHeaderVisible(true);
         // メニューバーのメニュー
         MenuItem fileroot = new MenuItem(this.menubar, SWT.CASCADE);
-        fileroot.setText("File");
+        fileroot.setText("&File");
         this.filemenu = new Menu(fileroot);
         fileroot.setMenu(this.filemenu);
 
         MenuItem savecsv = new MenuItem(this.filemenu, SWT.NONE);
-        savecsv.setText("Save to CSV(&S)\tCtrl+S");
+        savecsv.setText("&Save to CSV\tCtrl+S");
         savecsv.setAccelerator(SWT.CTRL + 'S');
         savecsv.addSelectionListener(new TableToCsvSaveAdapter(this.shell, this.getTitle(), this.getTableHeader(),
                 this.table));
 
         MenuItem operoot = new MenuItem(this.menubar, SWT.CASCADE);
-        operoot.setText("Action");
+        operoot.setText("&Action");
         this.opemenu = new Menu(operoot);
         operoot.setMenu(this.opemenu);
 
