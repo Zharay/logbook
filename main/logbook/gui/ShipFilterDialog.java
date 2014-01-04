@@ -127,7 +127,7 @@ public final class ShipFilterDialog extends Dialog {
      */
     private void createContents() {
         this.shell = new Shell(this.getParent(), this.getStyle());
-        this.shell.setText("フィルター");
+        this.shell.setText("Filter");
         this.shell.setLayout(new GridLayout(1, false));
 
         Composite composite = new Composite(this.shell, SWT.NONE);
@@ -137,110 +137,110 @@ public final class ShipFilterDialog extends Dialog {
         Group namegroup = new Group(composite, SWT.NONE);
         namegroup.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
         namegroup.setLayout(new RowLayout());
-        namegroup.setText("名前");
+        namegroup.setText("Name");
 
         Label namelabel = new Label(namegroup, SWT.NONE);
-        namelabel.setText("名前:");
+        namelabel.setText("Name:");
 
         this.nametext = new Text(namegroup, SWT.BORDER);
         this.nametext.setLayoutData(new RowData(160, SWT.DEFAULT));
         this.nametext.addModifyListener(new ApplyFilterModifyAdapter());
 
         this.regexp = new Button(namegroup, SWT.CHECK);
-        this.regexp.setText("正規表現");
+        this.regexp.setText("Regex");
         this.regexp.addSelectionListener(new ApplyFilterSelectionAdapter());
 
         Group shiptypegroup = new Group(composite, SWT.NONE);
         shiptypegroup.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
         shiptypegroup.setLayout(new GridLayout(3, false));
-        shiptypegroup.setText("艦種");
+        shiptypegroup.setText("Type");
 
         this.destroyer = new Button(shiptypegroup, SWT.CHECK);
-        this.destroyer.setText("駆逐艦");
+        this.destroyer.setText("DD");
         this.destroyer.setSelection(true);
         this.destroyer.addSelectionListener(new ApplyFilterSelectionAdapter());
 
         this.lightCruiser = new Button(shiptypegroup, SWT.CHECK);
-        this.lightCruiser.setText("軽巡洋艦");
+        this.lightCruiser.setText("CL");
         this.lightCruiser.setSelection(true);
         this.lightCruiser.addSelectionListener(new ApplyFilterSelectionAdapter());
 
         this.torpedoCruiser = new Button(shiptypegroup, SWT.CHECK);
-        this.torpedoCruiser.setText("重雷装巡洋艦");
+        this.torpedoCruiser.setText("CLT");
         this.torpedoCruiser.setSelection(true);
         this.torpedoCruiser.addSelectionListener(new ApplyFilterSelectionAdapter());
 
         this.heavyCruiser = new Button(shiptypegroup, SWT.CHECK);
-        this.heavyCruiser.setText("重巡洋艦");
+        this.heavyCruiser.setText("CA");
         this.heavyCruiser.setSelection(true);
         this.heavyCruiser.addSelectionListener(new ApplyFilterSelectionAdapter());
 
         this.flyingDeckCruiser = new Button(shiptypegroup, SWT.CHECK);
-        this.flyingDeckCruiser.setText("航空巡洋艦");
+        this.flyingDeckCruiser.setText("CAV");
         this.flyingDeckCruiser.setSelection(true);
         this.flyingDeckCruiser.addSelectionListener(new ApplyFilterSelectionAdapter());
 
         this.seaplaneTender = new Button(shiptypegroup, SWT.CHECK);
-        this.seaplaneTender.setText("水上機母艦");
+        this.seaplaneTender.setText("AV");
         this.seaplaneTender.setSelection(true);
         this.seaplaneTender.addSelectionListener(new ApplyFilterSelectionAdapter());
 
         this.escortCarrier = new Button(shiptypegroup, SWT.CHECK);
-        this.escortCarrier.setText("軽空母");
+        this.escortCarrier.setText("CVL");
         this.escortCarrier.setSelection(true);
         this.escortCarrier.addSelectionListener(new ApplyFilterSelectionAdapter());
 
         this.carrier = new Button(shiptypegroup, SWT.CHECK);
-        this.carrier.setText("正規空母");
+        this.carrier.setText("CV");
         this.carrier.setSelection(true);
         this.carrier.addSelectionListener(new ApplyFilterSelectionAdapter());
 
         this.battleship = new Button(shiptypegroup, SWT.CHECK);
-        this.battleship.setText("戦艦");
+        this.battleship.setText("BB");
         this.battleship.setSelection(true);
         this.battleship.addSelectionListener(new ApplyFilterSelectionAdapter());
 
         this.flyingDeckBattleship = new Button(shiptypegroup, SWT.CHECK);
-        this.flyingDeckBattleship.setText("航空戦艦");
+        this.flyingDeckBattleship.setText("BBV");
         this.flyingDeckBattleship.setSelection(true);
         this.flyingDeckBattleship.addSelectionListener(new ApplyFilterSelectionAdapter());
 
         this.submarine = new Button(shiptypegroup, SWT.CHECK);
-        this.submarine.setText("潜水艦");
+        this.submarine.setText("SS");
         this.submarine.setSelection(true);
         this.submarine.addSelectionListener(new ApplyFilterSelectionAdapter());
 
         this.carrierSubmarine = new Button(shiptypegroup, SWT.CHECK);
-        this.carrierSubmarine.setText("潜水空母");
+        this.carrierSubmarine.setText("SSV");
         this.carrierSubmarine.setSelection(true);
         this.carrierSubmarine.addSelectionListener(new ApplyFilterSelectionAdapter());
 
         this.landingship = new Button(shiptypegroup, SWT.CHECK);
-        this.landingship.setText("揚陸艦");
+        this.landingship.setText("LHA");
         this.landingship.setSelection(true);
         this.landingship.addSelectionListener(new ApplyFilterSelectionAdapter());
 
         this.armoredcarrier = new Button(shiptypegroup, SWT.CHECK);
-        this.armoredcarrier.setText("装甲空母");
+        this.armoredcarrier.setText("CVB");
         this.armoredcarrier.setSelection(true);
         this.armoredcarrier.addSelectionListener(new ApplyFilterSelectionAdapter());
 
         this.selectall = new Button(shiptypegroup, SWT.CHECK);
-        this.selectall.setText("全て選択");
+        this.selectall.setText("Select All");
         this.selectall.setSelection(true);
         this.selectall.addSelectionListener(new SelectAllSelectionAdapter());
 
         Group etcgroup = new Group(composite, SWT.NONE);
         etcgroup.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
         etcgroup.setLayout(new GridLayout(2, false));
-        etcgroup.setText("その他");
+        etcgroup.setText("Others");
 
         Composite itemcomposite = new Composite(etcgroup, SWT.NONE);
         itemcomposite.setLayout(new RowLayout());
         itemcomposite.setLayoutData(new GridData(GridData.FILL_HORIZONTAL, SWT.CENTER, false, false, 2, 1));
 
         this.item = new Button(itemcomposite, SWT.CHECK);
-        this.item.setText("装備");
+        this.item.setText("Equip");
         this.item.setSelection(false);
         this.item.addSelectionListener(new ItemCheckAdapter());
         this.item.addSelectionListener(new ApplyFilterSelectionAdapter());
@@ -257,22 +257,22 @@ public final class ShipFilterDialog extends Dialog {
         }
 
         this.onfleet = new Button(etcgroup, SWT.CHECK);
-        this.onfleet.setText("艦隊に所属");
+        this.onfleet.setText("Assigned");
         this.onfleet.setSelection(true);
         this.onfleet.addSelectionListener(new ApplyFilterSelectionAdapter());
 
         this.notonfleet = new Button(etcgroup, SWT.CHECK);
-        this.notonfleet.setText("艦隊に所属していない");
+        this.notonfleet.setText("Unassigned");
         this.notonfleet.setSelection(true);
         this.notonfleet.addSelectionListener(new ApplyFilterSelectionAdapter());
 
         this.locked = new Button(etcgroup, SWT.CHECK);
-        this.locked.setText("鍵付き");
+        this.locked.setText("Locked");
         this.locked.setSelection(true);
         this.locked.addSelectionListener(new ApplyFilterSelectionAdapter());
 
         this.notlocked = new Button(etcgroup, SWT.CHECK);
-        this.notlocked.setText("鍵付きではない");
+        this.notlocked.setText("Not Locked");
         this.notlocked.setSelection(true);
         this.notlocked.addSelectionListener(new ApplyFilterSelectionAdapter());
 
