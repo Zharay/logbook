@@ -140,9 +140,9 @@ public final class ApplicationMain {
             GlobalConfig.store();
             ShipConfig.store();
         } catch (Error e) {
-            LOG.fatal("メインスレッドが異常終了しました", e);
+            LOG.fatal("Main thread is aborted", e);
         } catch (Exception e) {
-            LOG.fatal("メインスレッドが異常終了しました", e);
+            LOG.fatal("Main thread is aborted", e);
         } finally {
             // リソースを開放する
             SWTResourceManager.dispose();

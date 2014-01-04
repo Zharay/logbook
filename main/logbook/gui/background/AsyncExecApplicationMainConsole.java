@@ -49,7 +49,7 @@ public final class AsyncExecApplicationMainConsole extends Thread {
                 Thread.sleep(UPDATE_FORMILIS);
             }
         } catch (Exception e) {
-            LOG.fatal("スレッドが異常終了しました", e);
+            LOG.fatal("Thread is aborted", e);
             throw new RuntimeException(e);
         }
     }

@@ -83,7 +83,7 @@ public final class AsyncExecApplicationMain extends Thread {
                 Thread.sleep(ONE_SECONDS_FORMILIS);
             }
         } catch (Exception e) {
-            LOG.fatal("スレッドが異常終了しました", e);
+            LOG.fatal("Thread is aborted", e);
             throw new RuntimeException(e);
         }
     }
@@ -195,7 +195,7 @@ public final class AsyncExecApplicationMain extends Thread {
                     tip.setVisible(true);
                 }
             } catch (Exception e) {
-                LOG.warn("お知らせの表示に失敗しました", e);
+                LOG.warn("Failed to display the notification", e);
             }
         }
 
