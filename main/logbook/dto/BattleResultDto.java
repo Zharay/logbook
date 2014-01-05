@@ -10,6 +10,9 @@ import java.util.Date;
 
 import javax.json.JsonObject;
 
+import logbook.internal.MapNames;
+import logbook.internal.Ship;
+
 /**
  * 海戦とドロップした艦娘を表します
  */
@@ -48,13 +51,16 @@ public final class BattleResultDto extends AbstractDto {
     public BattleResultDto(JsonObject object, BattleDto battle) {
 
         this.battleDate = Calendar.getInstance().getTime();
-        this.questName = object.getString("api_quest_name");
+        String jpname = object.getString("api_quest_name");
+        this.questName = MapNames.get(jpname);
         this.rank = object.getString("api_win_rank");
         this.enemyName = object.getJsonObject("api_enemy_info").getString("api_deck_name");
         this.dropFlag = object.containsKey("api_get_ship");
         if (this.dropFlag) {
-            this.dropType = object.getJsonObject("api_get_ship").getString("api_ship_type");
-            this.dropName = object.getJsonObject("api_get_ship").getString("api_ship_name");
+            String id = object.getJsonObject("api_get_ship").getJsonNumber("api_ship_id").toString();
+            ShipInfoDto intname = Ship.get(id);
+            this.dropType = intname.getType();
+            this.dropName = intname.getName();
         } else {
             this.dropType = "";
             this.dropName = "";

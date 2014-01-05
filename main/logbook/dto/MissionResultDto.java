@@ -66,12 +66,12 @@ public final class MissionResultDto extends AbstractDto {
      * @param 失敗・成功フラグ
      */
     public void setClearResult(int clearResult) {
-        this.clearResult = "成功";
+        this.clearResult = "Success";
 
         if (clearResult == 0) {
-            this.clearResult = "失敗";
+            this.clearResult = "Failure";
         } else if (clearResult == 2) {
-            this.clearResult = "大成功";
+            this.clearResult = "Great Success";
         }
     }
 

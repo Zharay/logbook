@@ -567,7 +567,7 @@ public final class GlobalConfig {
                 }
             }
         } catch (Exception e) {
-            LOG.fatal("設定ファイルの読み込みに失敗しました", e);
+            LOG.fatal("Fail to read the configuration file", e);
         }
         return properties;
     }
@@ -598,7 +598,7 @@ public final class GlobalConfig {
                 out.close();
             }
         } catch (Exception e) {
-            LOG.fatal("設定ファイルの書き込みに失敗しました", e);
+            LOG.fatal("Fail to write the configuration file", e);
         }
     }
 }

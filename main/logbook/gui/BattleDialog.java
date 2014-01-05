@@ -74,7 +74,7 @@ public final class BattleDialog extends Dialog {
         titleArea.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
         Label title = new Label(titleArea, SWT.NONE);
-        title.setText("「<海域名が入ります>」で作戦行動中に「<敵艦隊名>」と対峙しました");
+        title.setText("The fleet attacked <Enemy fleet name> in <Map Name>");
 
         Composite kaiteki = new Composite(this.shell, SWT.NONE);
         kaiteki.setLayout(new GridLayout(2, true));
@@ -82,13 +82,13 @@ public final class BattleDialog extends Dialog {
 
         Label top = new Label(kaiteki, SWT.NONE);
         top.setLayoutData(new GridData(GridData.FILL_HORIZONTAL, SWT.CENTER, false, false, 2, 1));
-        top.setText("交戦戦力");
+        top.setText("Belligerents");
 
         Label label1 = new Label(kaiteki, SWT.NONE);
-        label1.setText("味方艦隊名が入ります");
+        label1.setText("Ally fleet name");
 
         Label label2 = new Label(kaiteki, SWT.NONE);
-        label2.setText("敵艦隊名が入ります");
+        label2.setText("Enemy fleet name");
 
         Composite friend = new Composite(kaiteki, SWT.NONE);
         friend.setLayout(new GridLayout(2, false));
@@ -148,7 +148,7 @@ public final class BattleDialog extends Dialog {
         BattleResultDto result = GlobalContext.getBattleResultList().get(id);
         BattleDto battle = result.getBattleDto();
         // タイトル
-        title.setText("「" + result.getQuestName() + "」で作戦行動中に「" + result.getEnemyName() + "」と対峙しました");
+        title.setText("The fleet attacked " + result.getEnemyName() + " in " + result.getQuestName());
 
         if (battle != null) {
             DockDto dock = battle.getDock();
