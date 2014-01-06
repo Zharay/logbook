@@ -10,6 +10,8 @@ import java.util.Date;
 
 import javax.json.JsonObject;
 
+import logbook.internal.EQNames;
+
 /**
  * 開発した装備を表します
  */
@@ -55,7 +57,7 @@ public final class CreateItemDto extends AbstractDto {
      * @return 名称
      */
     public String getName() {
-        return this.name;
+        return EQNames.get(this.name);
     }
 
     /**

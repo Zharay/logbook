@@ -342,7 +342,7 @@ public final class ShipDto extends AbstractDto {
             if (-1 != itemid) {
                 ItemDto name = itemMap.get(itemid);
                 if (name != null) {
-                    itemNames.add(name.getName());
+                    itemNames.add(name.getENName());
                 } else {
                     itemNames.add("<UNKNOWN>");
                 }

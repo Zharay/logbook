@@ -347,7 +347,7 @@ public final class CreateReportLogic {
         for (Entry<ItemDto, Integer> entry : countitems) {
             ItemDto item = entry.getKey();
             count++;
-            body.add(new Object[] { count, item.getName(), item.getType(), entry.getValue(), item.getHoug(),
+            body.add(new Object[] { count, item.getENName(), item.getType(), entry.getValue(), item.getHoug(),
                     item.getHoum(), item.getKaih(), item.getLeng(), item.getLuck(), item.getBaku(), item.getRaig(),
                     item.getSaku(), item.getTais(), item.getTyku()
             });

@@ -250,7 +250,7 @@ public final class ShipFilterDialog extends Dialog {
         this.itemcombo.addSelectionListener(new ApplyFilterSelectionAdapter());
         Set<String> items = new TreeSet<String>();
         for (ItemDto entry : GlobalContext.getItemMap().values()) {
-            items.add(entry.getName());
+            items.add(entry.getENName());
         }
         for (String name : items) {
             this.itemcombo.add(name);

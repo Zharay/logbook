@@ -7,6 +7,7 @@ package logbook.dto;
 
 import javax.json.JsonObject;
 
+import logbook.internal.EQNames;
 import logbook.internal.ItemType;
 
 /**
@@ -161,6 +162,13 @@ public final class ItemDto extends AbstractDto {
      */
     public String getName() {
         return this.name;
+    }
+
+    /**
+     * @return English name
+     */
+    public String getENName() {
+        return EQNames.get(this.name);
     }
 
     /**
