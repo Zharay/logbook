@@ -23,8 +23,8 @@ public final class MapNames {
             this.put("東部オリョール海", "2-3");
             this.put("沖ノ島海域", "2-4");
             this.put("モーレイ海哨戒", "3-1");
-            this.put("キス島沖", "3-1");
-            this.put("アルフォンシーノ方面", "3-1");
+            this.put("キス島沖", "3-2");
+            this.put("アルフォンシーノ方面", "3-3");
             this.put("北方海域全域", "3-4");
             this.put("ジャム島攻略作戦", "4-1");
             this.put("カレー洋制圧戦", "4-2");
