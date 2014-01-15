@@ -110,7 +110,7 @@ public class FleetComposite extends Composite {
             Label namelabel = new Label(this.fleetGroup, SWT.NONE);
             namelabel.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
             namelabel.setFont(this.large1);
-            namelabel.setText("名前");
+            namelabel.setText("Name");
             // HP
             Composite hpComposite = new Composite(this.fleetGroup, SWT.NONE);
             GridLayout glHp = new GridLayout(3, false);
@@ -128,7 +128,7 @@ public class FleetComposite extends Composite {
             Label maxhp = new Label(hpComposite, SWT.NONE);
             maxhp.setText("/99");
             Label hpmsg = new Label(hpComposite, SWT.NONE);
-            hpmsg.setText("(健在)");
+            hpmsg.setText("(Good)");
 
             // ステータス
             new Label(this.fleetGroup, SWT.NONE);
@@ -143,11 +143,11 @@ public class FleetComposite extends Composite {
             stateComposite.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
             Label condst = new Label(stateComposite, SWT.NONE);
-            condst.setText("疲");
+            condst.setText("Morale ");
             Label fuelst = new Label(stateComposite, SWT.NONE);
-            fuelst.setText("燃");
+            fuelst.setText("Fuel ");
             Label bullst = new Label(stateComposite, SWT.NONE);
-            bullst.setText("弾");
+            bullst.setText("Ammo");
 
             // 疲労
             Label cond = new Label(this.fleetGroup, SWT.NONE);
@@ -223,7 +223,7 @@ public class FleetComposite extends Composite {
                     state |= FATAL;
                 }
 
-                this.hpmsgLabels[i].setText("(大破)");
+                this.hpmsgLabels[i].setText("(Heavy)");
                 this.hpmsgLabels[i].setBackground(SWTResourceManager.getColor(AppConstants.COND_RED_COLOR));
                 this.hpmsgLabels[i].setForeground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
             } else if (hpratio <= AppConstants.HALF_DAMAGE) {
@@ -232,29 +232,29 @@ public class FleetComposite extends Composite {
                     state |= WARN;
                 }
 
-                this.hpmsgLabels[i].setText("(中破)");
+                this.hpmsgLabels[i].setText("(Medium)");
                 this.hpmsgLabels[i].setBackground(SWTResourceManager.getColor(AppConstants.COND_ORANGE_COLOR));
                 this.hpmsgLabels[i].setForeground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
             } else if (hpratio <= AppConstants.SLIGHT_DAMAGE) {
-                this.hpmsgLabels[i].setText("(小破)");
+                this.hpmsgLabels[i].setText("(Light)");
                 this.hpmsgLabels[i].setBackground(null);
                 this.hpmsgLabels[i].setForeground(null);
             } else {
-                this.hpmsgLabels[i].setText("(健在)");
+                this.hpmsgLabels[i].setText("(Good)");
                 this.hpmsgLabels[i].setBackground(null);
                 this.hpmsgLabels[i].setForeground(null);
             }
 
             // ステータス
             // ステータス.疲労
-            this.condstLabels[i].setText("疲");
+            this.condstLabels[i].setText("Morale ");
             if (cond >= 49) {
                 this.condstLabels[i].setEnabled(false);
             } else {
                 this.condstLabels[i].setEnabled(true);
             }
             // ステータス.燃料
-            this.fuelstLabels[i].setText("燃");
+            this.fuelstLabels[i].setText("Fuel ");
             if (fuelraito >= 1f) {
                 this.fuelstLabels[i].setEnabled(false);
                 this.fuelstLabels[i].setForeground(null);
@@ -271,7 +271,7 @@ public class FleetComposite extends Composite {
                 }
             }
             // ステータス.弾
-            this.bullstLabels[i].setText("弾");
+            this.bullstLabels[i].setText("Ammo");
             if (bullraito >= 1f) {
                 this.bullstLabels[i].setEnabled(false);
                 this.bullstLabels[i].setBackground(null);
@@ -324,7 +324,7 @@ public class FleetComposite extends Composite {
                 this.iconLabels[i].setImage(null);
             }
             this.nameLabels[i].setText(name);
-            this.nameLabels[i].setToolTipText("燃:" + ship.getFuel() + "/" + ship.getFuelMax() + " 弾:"
+            this.nameLabels[i].setToolTipText("Fuel:" + ship.getFuel() + "/" + ship.getFuelMax() + " Ammo:"
                     + ship.getBull() + "/" + ship.getBullMax() + " Next:" + ship.getNext() + "exp");
             this.nowhpLabels[i].setText(Long.toString(nowhp));
             this.maxhpLabels[i].setText("/" + maxhp);

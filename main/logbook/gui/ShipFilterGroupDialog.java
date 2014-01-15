@@ -101,7 +101,7 @@ public final class ShipFilterGroupDialog extends AbstractTableDialog {
 
         this.treeItem = new TreeItem(this.tree, SWT.NONE);
         this.treeItem.setImage(SWTResourceManager.getImage(ShipFilterGroupDialog.class, "/resources/icon/star.png"));
-        this.treeItem.setText("グループ");
+        this.treeItem.setText("Group");
 
         ShipGroupListBean shipGroupList = ShipGroupConfig.get();
 
@@ -137,11 +137,11 @@ public final class ShipFilterGroupDialog extends AbstractTableDialog {
         this.shipcombo.setEnabled(false);
 
         this.btnAddShip = new Button(this.mainComposite, SWT.NONE);
-        this.btnAddShip.setText("追加");
+        this.btnAddShip.setText("Add");
         this.btnAddShip.addSelectionListener(new AddShipAdapter(this));
         this.btnAddShip.setEnabled(false);
         this.btnRemoveShip = new Button(this.mainComposite, SWT.NONE);
-        this.btnRemoveShip.setText("除去");
+        this.btnRemoveShip.setText("Remove");
         this.btnRemoveShip.addSelectionListener(new RemoveShipAdapter(this));
         this.btnRemoveShip.setEnabled(false);
         this.sashForm.setWeights(new int[] { 2, 5 });
@@ -154,7 +154,7 @@ public final class ShipFilterGroupDialog extends AbstractTableDialog {
 
     @Override
     protected String getTitle() {
-        return "グループエディター";
+        return "Group Editor";
     }
 
     @Override
@@ -164,7 +164,7 @@ public final class ShipFilterGroupDialog extends AbstractTableDialog {
 
     @Override
     protected String[] getTableHeader() {
-        return new String[] { "", "ID", "艦隊", "名前", "艦種", "Lv" };
+        return new String[] { "", "ID", "Fleet", "Name", "Type", "Lv" };
     }
 
     @Override
@@ -295,7 +295,7 @@ public final class ShipFilterGroupDialog extends AbstractTableDialog {
             List<ShipGroupBean> shipGroupList = ShipGroupConfig.get().getGroup();
 
             ShipGroupBean bean = new ShipGroupBean();
-            bean.setName("新規グループ");
+            bean.setName("New Group");
             shipGroupList.add(bean);
 
             TreeItem item = new TreeItem(this.dialog.treeItem, SWT.NONE);
@@ -331,8 +331,8 @@ public final class ShipFilterGroupDialog extends AbstractTableDialog {
 
                 MessageBox box = new MessageBox(this.dialog.shell, SWT.YES | SWT.NO
                         | SWT.ICON_QUESTION);
-                box.setText("グループを除去");
-                box.setMessage("「" + target.getName() + "」を除去しますか？");
+                box.setText("Confirmation");
+                box.setMessage("Do you want to remove " + target.getName() + "from the group list？");
                 if (box.open() == SWT.YES) {
                     List<ShipGroupBean> shipGroupList = ShipGroupConfig.get().getGroup();
                     for (int i = 0; i < shipGroupList.size(); i++) {

@@ -5,8 +5,11 @@
  */
 package logbook.gui;
 
-import logbook.config.GlobalConfig;
+import logbook.config.AppConfig;
+import logbook.config.ConfigMigration;
 import logbook.config.ShipConfig;
+import logbook.config.ShipGroupConfig;
+import logbook.constants.AppConstants;
 import logbook.gui.background.AsyncExecApplicationMain;
 import logbook.gui.background.AsyncExecApplicationMainConsole;
 import logbook.gui.background.AsyncExecUpdateCheck;
@@ -25,6 +28,7 @@ import logbook.gui.listener.ShipListReportAdapter;
 import logbook.gui.listener.TraySelectionListener;
 import logbook.gui.logic.LayoutLogic;
 import logbook.gui.logic.Sound;
+import logbook.gui.widgets.FleetComposite;
 import logbook.server.proxy.ProxyServer;
 import logbook.thread.ThreadManager;
 import logbook.thread.ThreadStateObserver;
@@ -132,13 +136,18 @@ public final class ApplicationMain {
     public static void main(String[] args) {
         try {
             // 設定読み込み
+            AppConfig.load();
             ShipConfig.load();
+            ShipGroupConfig.load();
+            // 旧設定ファイルを移行します
+            ConfigMigration.migration();
             // アプリケーション開始
             ApplicationMain window = new ApplicationMain();
             window.open();
             // ウインドウが閉じたタイミングで設定を書き込みます
-            GlobalConfig.store();
+            AppConfig.store();
             ShipConfig.store();
+            ShipGroupConfig.store();
         } catch (Error e) {
             LOG.fatal("Main thread is aborted", e);
         } catch (Exception e) {
@@ -171,11 +180,14 @@ public final class ApplicationMain {
      * 画面レイアウトを作成します
      */
     public void createContents() {
-
         final Display display = Display.getDefault();
-        this.shell = new Shell(SWT.CLOSE | SWT.TITLE | SWT.MIN | SWT.RESIZE | GlobalConfig.getOnTop());
-        this.shell.setText("logbook " + GlobalConfig.VERSION);
-        this.shell.setAlpha(GlobalConfig.getAlpha());
+        int shellStyle = SWT.CLOSE | SWT.TITLE | SWT.MIN | SWT.RESIZE;
+        if (AppConfig.get().isOnTop()) {
+            shellStyle |= SWT.ON_TOP;
+        }
+        this.shell = new Shell(shellStyle);
+        this.shell.setText("logbook " + AppConstants.VERSION);
+        this.shell.setAlpha(AppConfig.get().getAlpha());
         GridLayout glShell = new GridLayout(1, false);
         glShell.horizontalSpacing = 1;
         glShell.marginTop = 0;
@@ -188,11 +200,15 @@ public final class ApplicationMain {
             @Override
             public void shellClosed(ShellEvent e) {
                 // 終了の確認でウインドウ位置を記憶
-                GlobalConfig.setLocation(ApplicationMain.this.shell.getLocation());
+                Point location = ApplicationMain.this.shell.getLocation();
+                AppConfig.get().setLocationX(location.x);
+                AppConfig.get().setLocationY(location.y);
+                AppConfig.get().setWidth(ApplicationMain.this.shell.getSize().x);
+                AppConfig.get().setHeight(ApplicationMain.this.shell.getSize().y);
 
                 MessageBox box = new MessageBox(ApplicationMain.this.shell, SWT.YES | SWT.NO
                         | SWT.ICON_QUESTION);
-                box.setText("logbook");
+                box.setText("Confirmation");
                 box.setMessage("Are you sure you want to exit logbook?");
                 if (box.open() == SWT.YES) {
                     e.doit = true;
@@ -257,18 +273,19 @@ public final class ApplicationMain {
         cmdshiplist.setText("&Ships\tCtrl+S");
         cmdshiplist.setAccelerator(SWT.CTRL + 'S');
         cmdshiplist.addSelectionListener(new ShipListReportAdapter(this.shell));
+
         // セパレータ
         new MenuItem(cmdmenu, SWT.SEPARATOR);
         // コマンド-お風呂に入りたい艦娘
         MenuItem cmdbathwaterlist = new MenuItem(cmdmenu, SWT.NONE);
-        cmdbathwaterlist.setText("&Repair Queue\tCtrl+R");
-        cmdbathwaterlist.setAccelerator(SWT.CTRL + 'R');
+        cmdbathwaterlist.setText("Repair &Queue\tCtrl+Q");
+        cmdbathwaterlist.setAccelerator(SWT.CTRL + 'Q');
         cmdbathwaterlist.addSelectionListener(new BathwaterTableAdapter(this.shell));
         // セパレータ
         new MenuItem(cmdmenu, SWT.SEPARATOR);
         // 表示-縮小表示
         final MenuItem dispsize = new MenuItem(cmdmenu, SWT.CHECK);
-        dispsize.setText("Mini-size(&M)\tCtrl+M");
+        dispsize.setText("&Mini-size\tCtrl+M");
         dispsize.setAccelerator(SWT.CTRL + 'M');
         // セパレータ
         new MenuItem(cmdmenu, SWT.SEPARATOR);
@@ -288,11 +305,16 @@ public final class ApplicationMain {
         calcexp.setAccelerator(SWT.CTRL + 'C');
         calcexp.addSelectionListener(new CalcExpAdapter(this.shell));
 
-        // ヘルプ-設定
-        MenuItem config = new MenuItem(etcmenu, SWT.NONE);
-        config.setText("&Settings");
-        config.addSelectionListener(new ConfigDialogAdapter(this.shell));
-        // ヘルプ-自動プロキシ構成スクリプトファイル生成
+        // その他-グループエディター
+        MenuItem shipgroup = new MenuItem(etcmenu, SWT.NONE);
+        shipgroup.setText("&Group Editor");
+        shipgroup.addSelectionListener(new SelectionAdapter() {
+            @Override
+            public void widgetSelected(SelectionEvent e) {
+                new ShipFilterGroupDialog(ApplicationMain.this.shell).open();
+            }
+        });
+        // その他-自動プロキシ構成スクリプトファイル生成
         MenuItem pack = new MenuItem(etcmenu, SWT.NONE);
         pack.setText("&PAC File Generator");
         pack.addSelectionListener(new SelectionAdapter() {
@@ -301,7 +323,13 @@ public final class ApplicationMain {
                 new CreatePacFileDialog(ApplicationMain.this.shell).open();
             }
         });
-        // ヘルプ-バージョン情報
+        // セパレータ
+        new MenuItem(etcmenu, SWT.SEPARATOR);
+        // その他-設定
+        MenuItem config = new MenuItem(etcmenu, SWT.NONE);
+        config.setText("&Settings");
+        config.addSelectionListener(new ConfigDialogAdapter(this.shell));
+        // その他-バージョン情報
         MenuItem version = new MenuItem(etcmenu, SWT.NONE);
         version.setText("&About");
         version.addSelectionListener(new HelpEventListener(this.shell));
@@ -329,10 +357,10 @@ public final class ApplicationMain {
         this.tabFolder = new CTabFolder(this.shell, SWT.NONE);
         this.tabFolder.setSelectionBackground(Display.getCurrent().getSystemColor(
                 SWT.COLOR_TITLE_INACTIVE_BACKGROUND_GRADIENT));
-        this.tabFolder.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+        this.tabFolder.setLayoutData(new GridData(GridData.FILL_HORIZONTAL | GridData.FILL_VERTICAL));
         this.tabFolder.setTabHeight(26);
         this.tabFolder.marginWidth = 0;
-        this.tabFolder.setMinimumCharacters(5);
+        this.tabFolder.setMinimumCharacters(2);
 
         // 母港タブ
         CTabItem mainItem = new CTabItem(this.tabFolder, SWT.NONE);
@@ -367,12 +395,12 @@ public final class ApplicationMain {
         this.deckGroup.setLayout(glDeckGroup);
 
         this.deckNotice = new Button(this.deckGroup, SWT.CHECK);
-        this.deckNotice.setSelection(GlobalConfig.getNoticeDeckmission());
+        this.deckNotice.setSelection(AppConfig.get().isNoticeDeckmission());
         this.deckNotice.setLayoutData(new GridData(GridData.FILL_HORIZONTAL, SWT.CENTER, false, false, 2, 1));
         this.deckNotice.addSelectionListener(new SelectionAdapter() {
             @Override
             public void widgetSelected(SelectionEvent e) {
-                GlobalConfig.setNoticeDeckmission(ApplicationMain.this.deckNotice.getSelection());
+                AppConfig.get().setNoticeDeckmission(ApplicationMain.this.deckNotice.getSelection());
             }
         });
         this.deckNotice.setText("Notify me 1 minute early");
@@ -421,13 +449,13 @@ public final class ApplicationMain {
         this.ndockGroup.setLayout(glNdockGroup);
 
         this.ndockNotice = new Button(this.ndockGroup, SWT.CHECK);
-        this.ndockNotice.setSelection(GlobalConfig.getNoticeNdock());
+        this.ndockNotice.setSelection(AppConfig.get().isNoticeNdock());
         this.ndockNotice.setLayoutData(new GridData(GridData.FILL_HORIZONTAL, SWT.CENTER, false, false, 2, 1));
         this.ndockNotice.setText("Notify me 1 minute early");
         this.ndockNotice.addSelectionListener(new SelectionAdapter() {
             @Override
             public void widgetSelected(SelectionEvent e) {
-                GlobalConfig.setNoticeNdock(ApplicationMain.this.ndockNotice.getSelection());
+                AppConfig.get().setNoticeNdock(ApplicationMain.this.ndockNotice.getSelection());
             }
         });
 
@@ -472,7 +500,7 @@ public final class ApplicationMain {
         this.ndock4time.setLayoutData(gdndock4time);
 
         // コンソール
-        this.consoleComposite = new Composite(this.shell, SWT.NONE);
+        this.consoleComposite = new Composite(this.mainComposite, SWT.NONE);
         GridLayout loglayout = new GridLayout(1, false);
         loglayout.verticalSpacing = 1;
         loglayout.marginTop = 0;
@@ -487,7 +515,7 @@ public final class ApplicationMain {
         this.console.setLayoutData(new GridData(GridData.FILL_HORIZONTAL | GridData.FILL_VERTICAL));
 
         // 初期設定 縮小表示が有効なら縮小表示にする
-        if (GlobalConfig.getMinimumLayout()) {
+        if (AppConfig.get().isMinimumLayout()) {
             this.shell.setRedraw(false);
             ApplicationMain.this.hide(true, this.commandComposite, this.deckNotice, this.deck1name, this.deck2name,
                     this.deck3name, this.ndockNotice, this.ndock1name, this.ndock2name, this.ndock3name,
@@ -496,7 +524,7 @@ public final class ApplicationMain {
             this.shell.pack();
             this.shell.setRedraw(true);
         } else {
-            this.shell.setSize(GlobalConfig.getWidth(), GlobalConfig.getHeight());
+            this.shell.setSize(AppConfig.get().getWidth(), AppConfig.get().getHeight());
         }
 
         // 縮小表示チェック時の動作
@@ -524,7 +552,7 @@ public final class ApplicationMain {
                     CTabItem[] tabitems = ApplicationMain.this.tabFolder.getItems();
                     for (CTabItem tabitem : tabitems) {
                         Control control = tabitem.getControl();
-                        if (control instanceof AsyncExecApplicationMain.FleetComposite) {
+                        if (control instanceof FleetComposite) {
                             ApplicationMain.this.hide(true, control);
                         }
                     }
@@ -534,21 +562,22 @@ public final class ApplicationMain {
                     ApplicationMain.this.tabFolder.setSingle(false);
                     for (CTabItem tabitem : tabitems) {
                         Control control = tabitem.getControl();
-                        if (control instanceof AsyncExecApplicationMain.FleetComposite) {
+                        if (control instanceof FleetComposite) {
                             ApplicationMain.this.hide(false, control);
                         }
                     }
                 } else {
-                    shell.setSize(GlobalConfig.getWidth(), GlobalConfig.getHeight());
+                    shell.setSize(AppConfig.get().getWidth(), AppConfig.get().getHeight());
                 }
                 // 設定を保存
-                GlobalConfig.setMinimumLayout(minimum);
+                AppConfig.get().setMinimumLayout(minimum);
             }
         });
         // 前回のウインドウ位置を取得する
-        Point location = GlobalConfig.getLocation();
-        if (location != null) {
-            this.shell.setLocation(location);
+        int locationX = AppConfig.get().getLocationX();
+        int locationY = AppConfig.get().getLocationY();
+        if ((locationX != -1) && (locationY != -1)) {
+            this.shell.setLocation(new Point(locationX, locationY));
         }
 
         this.startThread();
@@ -602,7 +631,7 @@ public final class ApplicationMain {
         ThreadManager.start();
 
         // アップデートチェックする
-        if (GlobalConfig.getCheckUpdate()) {
+        if (AppConfig.get().isCheckUpdate()) {
             new AsyncExecUpdateCheck(this.shell).start();
         }
     }

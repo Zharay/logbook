@@ -79,7 +79,6 @@ public final class ShipFilterDialog extends Dialog {
     private Button armoredcarrier;
     /** 全て選択 */
     private Button selectall;
-
     /** 装備 */
     private Button item;
     /** 装備 */
@@ -346,7 +345,7 @@ public final class ShipFilterDialog extends Dialog {
      * @return フィルター
      */
     private ShipFilterDto createFilter() {
-        ShipFilterDto filter = new ShipFilterDto();
+        ShipFilterDto filter = this.shipTable.getFilter();
         filter.nametext = this.nametext.getText();
         filter.regexp = this.regexp.getSelection();
         filter.destroyer = this.destroyer.getSelection();
@@ -368,6 +367,8 @@ public final class ShipFilterDialog extends Dialog {
                 filter.itemname = this.itemcombo.getItem(ShipFilterDialog.this.itemcombo
                         .getSelectionIndex());
             }
+        } else {
+            filter.itemname = null;
         }
         filter.onfleet = this.onfleet.getSelection();
         filter.notonfleet = this.notonfleet.getSelection();

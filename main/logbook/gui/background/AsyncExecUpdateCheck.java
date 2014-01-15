@@ -7,7 +7,7 @@ package logbook.gui.background;
 
 import java.awt.Desktop;
 
-import logbook.config.GlobalConfig;
+import logbook.constants.AppConstants;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.logging.log4j.LogManager;
@@ -40,9 +40,9 @@ public final class AsyncExecUpdateCheck extends Thread {
     @Override
     public void run() {
         try {
-            final String newversion = IOUtils.toString(GlobalConfig.UPDATE_CHECK_URI);
+            final String newversion = IOUtils.toString(AppConstants.UPDATE_CHECK_URI);
 
-            if (!GlobalConfig.VERSION.equals(newversion)) {
+            if (!AppConstants.VERSION.equals(newversion)) {
                 Display.getDefault().asyncExec(new Runnable() {
                     @Override
                     public void run() {
@@ -51,14 +51,14 @@ public final class AsyncExecUpdateCheck extends Thread {
                                 | SWT.ICON_QUESTION);
                         box.setText("Update");
                         box.setMessage("There is a new version available. Update?\r\n"
-                                + "Current: " + GlobalConfig.VERSION + "\r\n"
-                                + "New: " + newversion + "\r\n"
+                                + "Current: " + AppConstants.VERSION + "\r\n"
+                                + "Latest: " + newversion + "\r\n"
                                 + "※You can turn off this notification in the Settings menu");
 
                         // OKを押されたらホームページへ移動する
                         if (box.open() == SWT.YES) {
                             try {
-                                Desktop.getDesktop().browse(GlobalConfig.HOME_PAGE_URI);
+                                Desktop.getDesktop().browse(AppConstants.HOME_PAGE_URI);
                             } catch (Exception e) {
                                 LOG.warn("Failed to open the website", e);
                             }
