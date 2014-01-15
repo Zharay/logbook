@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="1.7.0_45" class="java.beans.XMLDecoder">
+ <object class="logbook.config.bean.AppConfigBean">
+  <void property="locationX">
+   <int>8</int>
+  </void>
+  <void property="locationY">
+   <int>254</int>
+  </void>
+ </object>
+</java>

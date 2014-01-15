@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="1.7.0_45" class="java.beans.XMLDecoder">
+ <object class="logbook.config.bean.ShipGroupListBean">
+  <void property="group">
+   <void method="add">
+    <object class="logbook.config.bean.ShipGroupBean">
+     <void property="name">
+      <string>Mikawa Fleet</string>
+     </void>
+     <void property="ships">
+      <void method="add">
+       <long>250</long>
+      </void>
+      <void method="add">
+       <long>745</long>
+      </void>
+      <void method="add">
+       <long>737</long>
+      </void>
+      <void method="add">
+       <long>868</long>
+      </void>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="logbook.config.bean.ShipGroupBean">
+     <void property="name">
+      <string>Nagumo Fleet</string>
+     </void>
+     <void property="ships">
+      <void method="add">
+       <long>36</long>
+      </void>
+      <void method="add">
+       <long>2315</long>
+      </void>
+      <void method="add">
+       <long>205</long>
+      </void>
+      <void method="add">
+       <long>290</long>
+      </void>
+     </void>
+    </object>
+   </void>
+  </void>
+ </object>
+</java>

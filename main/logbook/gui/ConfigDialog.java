@@ -6,11 +6,17 @@
 package logbook.gui;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import logbook.config.AppConfig;
+import logbook.gui.logic.LayoutLogic;
 
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.SashForm;
+import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.GridData;
@@ -25,9 +31,9 @@ import org.eclipse.swt.widgets.DirectoryDialog;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.widgets.TabFolder;
-import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.widgets.Text;
+import org.eclipse.swt.widgets.Tree;
+import org.eclipse.swt.widgets.TreeItem;
 
 /**
  * 設定画面
@@ -35,7 +41,10 @@ import org.eclipse.swt.widgets.Text;
  */
 public final class ConfigDialog extends Dialog {
 
+    private final Map<String, Composite> compositeMap = new HashMap<String, Composite>();
     private Shell shell;
+    private Composite composite;
+    private ScrolledComposite scrolledComposite;
 
     /**
      * Create the dialog.
@@ -66,19 +75,43 @@ public final class ConfigDialog extends Dialog {
      */
     private void createContents() {
         this.shell = new Shell(this.getParent(), this.getStyle());
+        this.shell.setSize(470, 320);
         this.shell.setText(this.getText());
         this.shell.setLayout(new GridLayout(1, false));
 
-        TabFolder tabFolder = new TabFolder(this.shell, SWT.NONE);
-        tabFolder.setLayoutData(new GridData(GridData.FILL_HORIZONTAL | GridData.FILL_VERTICAL));
+        SashForm sashForm = new SashForm(this.shell, SWT.SMOOTH);
+        sashForm.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+
+        // ツリーメニュー
+        Tree tree = new Tree(sashForm, SWT.BORDER);
+        tree.addSelectionListener(new TreeSelectionAdapter(this));
+        TreeItem systemroot = new TreeItem(tree, SWT.NONE);
+        systemroot.setText("System");
+        systemroot.setData("system");
+        TreeItem fleettab = new TreeItem(systemroot, SWT.NONE);
+        fleettab.setText("Fleets");
+        fleettab.setData("fleettab");
+        TreeItem capture = new TreeItem(systemroot, SWT.NONE);
+        capture.setText("Capture");
+        capture.setData("capture");
+        TreeItem development = new TreeItem(tree, SWT.NONE);
+        development.setText("Developer");
+        development.setData("development");
+
+        systemroot.setExpanded(true);
+        development.setExpanded(true);
+
+        this.scrolledComposite = new ScrolledComposite(sashForm, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
+        this.scrolledComposite.setExpandHorizontal(true);
+        this.scrolledComposite.setExpandVertical(true);
+
+        this.composite = new Composite(this.scrolledComposite, SWT.NONE);
+        this.composite.setLayout(new GridLayout(1, false));
 
         // システム タブ
-        TabItem tabSystem = new TabItem(tabFolder, SWT.NONE);
-        tabSystem.setText("System");
-
-        Composite compositeSystem = new Composite(tabFolder, SWT.NONE);
+        Composite compositeSystem = new Composite(this.composite, SWT.NONE);
+        this.compositeMap.put("system", compositeSystem);
         compositeSystem.setLayout(new GridLayout(3, false));
-        tabSystem.setControl(compositeSystem);
 
         Label label = new Label(compositeSystem, SWT.NONE);
         label.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
@@ -138,58 +171,57 @@ public final class ConfigDialog extends Dialog {
         reportSavedirBtn.setText("Select");
 
         final Button hidewindow = new Button(compositeSystem, SWT.CHECK);
-        hidewindow.setLayoutData(new GridData(GridData.FILL_HORIZONTAL, SWT.CENTER, false, false, 3, 1));
+        hidewindow.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 3, 1));
         hidewindow.setText("Minimize to tray");
         hidewindow.setSelection(AppConfig.get().isHideWindow());
 
         final Button ontop = new Button(compositeSystem, SWT.CHECK);
-        ontop.setLayoutData(new GridData(GridData.FILL_HORIZONTAL, SWT.CENTER, false, false, 3, 1));
+        ontop.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 3, 1));
         ontop.setText("Always on top*");
         ontop.setSelection(AppConfig.get().isOnTop());
 
         final Button checkUpdate = new Button(compositeSystem, SWT.CHECK);
-        checkUpdate.setLayoutData(new GridData(GridData.FILL_HORIZONTAL, SWT.CENTER, false, false, 3, 1));
+        checkUpdate.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 3, 1));
         checkUpdate.setText("Check for updates*");
         checkUpdate.setSelection(AppConfig.get().isCheckUpdate());
 
-        // 艦隊タブ タブ
-        TabItem tabFleetTab = new TabItem(tabFolder, SWT.NONE);
-        tabFleetTab.setText("Fleet");
+        final Button checkDoit = new Button(compositeSystem, SWT.CHECK);
+        checkDoit.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 3, 1));
+        checkDoit.setText("終了時に確認する");
+        checkDoit.setSelection(AppConfig.get().isCheckDoit());
 
-        Composite compositeFleetTab = new Composite(tabFolder, SWT.NONE);
+        // 艦隊タブ タブ
+        Composite compositeFleetTab = new Composite(this.composite, SWT.NONE);
+        this.compositeMap.put("fleettab", compositeFleetTab);
         compositeFleetTab.setLayout(new GridLayout(1, false));
-        tabFleetTab.setControl(compositeFleetTab);
 
         Label Fleetdesc = new Label(compositeFleetTab, SWT.NONE);
         Fleetdesc.setText("Display warning icon if:");
 
         final Button warnByNeedSupply = new Button(compositeFleetTab, SWT.CHECK);
-        warnByNeedSupply.setLayoutData(new GridData(GridData.FILL_HORIZONTAL, SWT.CENTER, false, false, 1, 1));
+        warnByNeedSupply.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1));
         warnByNeedSupply.setText("insufficient supplies");
         warnByNeedSupply.setSelection(AppConfig.get().isWarnByNeedSupply());
 
         final Button warnByCondState = new Button(compositeFleetTab, SWT.CHECK);
-        warnByCondState.setLayoutData(new GridData(GridData.FILL_HORIZONTAL, SWT.CENTER, false, false, 1, 1));
+        warnByCondState.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1));
         warnByCondState.setText("low morale");
         warnByCondState.setSelection(AppConfig.get().isWarnByCondState());
 
         final Button warnByHalfDamage = new Button(compositeFleetTab, SWT.CHECK);
-        warnByHalfDamage.setLayoutData(new GridData(GridData.FILL_HORIZONTAL, SWT.CENTER, false, false, 1, 1));
+        warnByHalfDamage.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1));
         warnByHalfDamage.setText("moderately damaged");
         warnByHalfDamage.setSelection(AppConfig.get().isWarnByHalfDamage());
 
         final Button fatalBybadlyDamage = new Button(compositeFleetTab, SWT.CHECK);
-        fatalBybadlyDamage.setLayoutData(new GridData(GridData.FILL_HORIZONTAL, SWT.CENTER, false, false, 1, 1));
+        fatalBybadlyDamage.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1));
         fatalBybadlyDamage.setText("severely damaged");
         fatalBybadlyDamage.setSelection(AppConfig.get().isFatalBybadlyDamage());
 
         // キャプチャ タブ
-        TabItem tabCapture = new TabItem(tabFolder, SWT.NONE);
-        tabCapture.setText("Screenshot");
-
-        Composite compositeCapture = new Composite(tabFolder, SWT.NONE);
+        Composite compositeCapture = new Composite(this.composite, SWT.NONE);
+        this.compositeMap.put("capture", compositeCapture);
         compositeCapture.setLayout(new GridLayout(3, false));
-        tabCapture.setControl(compositeCapture);
 
         Label label4 = new Label(compositeCapture, SWT.NONE);
         label4.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
@@ -232,14 +264,11 @@ public final class ConfigDialog extends Dialog {
         new Label(compositeCapture, SWT.NONE);
 
         // Development タブ
-        TabItem tabDevelopment = new TabItem(tabFolder, SWT.NONE);
-        tabDevelopment.setText("Developer");
-
-        Composite compositeDevelopment = new Composite(tabFolder, SWT.NONE);
+        Composite compositeDevelopment = new Composite(this.composite, SWT.NONE);
+        this.compositeMap.put("development", compositeDevelopment);
         compositeDevelopment.setLayout(new GridLayout(2, false));
-        tabDevelopment.setControl(compositeDevelopment);
-        new Label(compositeDevelopment, SWT.NONE);
 
+        new Label(compositeDevelopment, SWT.NONE);
         final Button btnJson = new Button(compositeDevelopment, SWT.CHECK);
         btnJson.setText("Save JSON to file");
         btnJson.setSelection(AppConfig.get().isStoreJson());
@@ -272,6 +301,7 @@ public final class ConfigDialog extends Dialog {
                 }
                 AppConfig.get().setHideWindow(hidewindow.getSelection());
                 AppConfig.get().setOnTop(ontop.getSelection());
+                AppConfig.get().setCheckDoit(checkDoit.getSelection());
                 if (StringUtils.isNumeric(soundlevel.getText())) {
                     float level = (float) Integer.parseInt(soundlevel.getText()) / 100;
                     AppConfig.get().setSoundLevel(level);
@@ -312,6 +342,46 @@ public final class ConfigDialog extends Dialog {
             }
         });
 
-        this.shell.pack();
+        for (Entry<String, Composite> entry : this.compositeMap.entrySet()) {
+            LayoutLogic.hide(entry.getValue(), true);
+        }
+
+        sashForm.setWeights(new int[] { 2, 5 });
+        this.scrolledComposite.setContent(this.composite);
+        this.scrolledComposite.setMinSize(this.composite.computeSize(SWT.DEFAULT, SWT.DEFAULT));
+    }
+
+    /**
+     * ツリーをクリックした時に呼び出されるアダプター
+     *
+     */
+    private static final class TreeSelectionAdapter extends SelectionAdapter {
+
+        /** ダイアログ */
+        private final ConfigDialog dialog;
+
+        /**
+         * コンストラクター
+         */
+        public TreeSelectionAdapter(ConfigDialog dialog) {
+            this.dialog = dialog;
+        }
+
+        @Override
+        public void widgetSelected(SelectionEvent e) {
+            Object data = e.item.getData();
+            if (data instanceof String) {
+                String treeKey = (String) data;
+                for (Entry<String, Composite> entry : this.dialog.compositeMap.entrySet()) {
+                    if (entry.getKey().equals(treeKey)) {
+                        LayoutLogic.hide(entry.getValue(), false);
+                    } else {
+                        LayoutLogic.hide(entry.getValue(), true);
+                    }
+                }
+                this.dialog.composite.layout();
+                this.dialog.scrolledComposite.setMinSize(this.dialog.composite.computeSize(SWT.DEFAULT, SWT.DEFAULT));
+            }
+        }
     }
 }
