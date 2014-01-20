@@ -273,7 +273,7 @@ public class FleetComposite extends Composite {
                 }
                 // 大破している艦娘がいる場合メッセージを表示
                 this.badlyDamage = true;
-                this.hpmsgLabels[i].setText("Heavy");
+                this.hpmsgLabels[i].setText("High");
                 this.hpmsgLabels[i].setBackground(SWTResourceManager.getColor(AppConstants.COND_RED_COLOR));
                 this.hpmsgLabels[i].setForeground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
             } else if (hpratio <= AppConstants.HALF_DAMAGE) {
@@ -282,11 +282,11 @@ public class FleetComposite extends Composite {
                     state |= WARN;
                 }
 
-                this.hpmsgLabels[i].setText("Medium");
+                this.hpmsgLabels[i].setText("Med");
                 this.hpmsgLabels[i].setBackground(SWTResourceManager.getColor(AppConstants.COND_ORANGE_COLOR));
                 this.hpmsgLabels[i].setForeground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
             } else if (hpratio <= AppConstants.SLIGHT_DAMAGE) {
-                this.hpmsgLabels[i].setText("Light");
+                this.hpmsgLabels[i].setText("Low");
                 this.hpmsgLabels[i].setBackground(null);
                 this.hpmsgLabels[i].setForeground(null);
             } else {
@@ -418,7 +418,7 @@ public class FleetComposite extends Composite {
             StyleRange style = new StyleRange();
             style.fontStyle = SWT.BOLD;
             style.underline = true;
-            style.underlineStyle = SWT.UNDERLINE_SQUIGGLE;
+            // style.underlineStyle = SWT.UNDERLINE_SQUIGGLE;
             style.underlineColor = SWTResourceManager.getColor(SWT.COLOR_RED);
             style.foreground = SWTResourceManager.getColor(SWT.COLOR_RED);
             this.addStyledText(this.message,
@@ -463,7 +463,7 @@ public class FleetComposite extends Composite {
         if (((this.state & FATAL) == FATAL) && GlobalContext.isSortie(this.dock.getId())) {
             ToolTip tip = new ToolTip(this.getShell(), SWT.BALLOON
                     | SWT.ICON_ERROR);
-            tip.setText("大破警告");
+            tip.setText("Warning");
             tip.setMessage(AppConstants.MESSAGE_STOP_SORTIE);
             this.main.getTrayItem().setToolTip(tip);
             tip.setVisible(true);

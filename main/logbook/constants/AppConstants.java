@@ -286,29 +286,29 @@ public class AppConstants {
             AppConstants.R_HPGAUGE_50 };
 
     /** 艦隊タブの艦娘ラベルに設定するツールチップテキスト */
-    public static final String TOOLTIP_FLEETTAB_SHIP = "HP:{0}/{1} 燃料:{2}/{3} 弾:{4}/{5}\nNext:{6}exp";
+    public static final String TOOLTIP_FLEETTAB_SHIP = "HP:{0}/{1} Fuel:{2}/{3} Ammo:{4}/{5}\nNext:{6}exp";
 
     /** メッセージ 出撃できます。 */
-    public static final String MESSAGE_GOOD = "出撃できます。";
+    public static final String MESSAGE_GOOD = "Ready to sortie!";
 
     /** メッセージ {0} 出撃はできません。 */
-    public static final String MESSAGE_BAD = "{0} 出撃はできません。";
+    public static final String MESSAGE_BAD = "{0}";
 
     /** メッセージ 大破している艦娘がいます  */
-    public static final String MESSAGE_BADLY_DAMAGE = "大破している艦娘がいます";
+    public static final String MESSAGE_BADLY_DAMAGE = "There are severely damaged ships.";
 
     /** メッセージ 入渠中の艦娘がいます  */
-    public static final String MESSAGE_BATHWATER = "入渠中の艦娘がいます";
+    public static final String MESSAGE_BATHWATER = "Ships are being repaired.";
 
     /** メッセージ 遠征中です。  */
-    public static final String MESSAGE_MISSION = "遠征中です。";
+    public static final String MESSAGE_MISSION = "On an expedition.";
 
     /** メッセージ 疲労している艦娘がいます */
-    public static final String MESSAGE_COND = "疲労している艦娘がいます {0}頃に回復します。";
+    public static final String MESSAGE_COND = "\nMorale will be fully recovered at {0}";
 
     /** メッセージ 制空値:{0} */
-    public static final String MESSAGE_SEIKU = "制空値:{0}";
+    public static final String MESSAGE_SEIKU = "\nAir Superiority: {0}";
 
     /** メッセージ 大破している艦娘がいます、進撃はできません。 */
-    public static final String MESSAGE_STOP_SORTIE = "大破している艦娘がいます、進撃はできません。";
+    public static final String MESSAGE_STOP_SORTIE = "There are severely damaged ships. Stop the sortie!";
 }

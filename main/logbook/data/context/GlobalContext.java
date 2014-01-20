@@ -874,7 +874,7 @@ public final class GlobalContext {
             isSortie[id - 1] = true;
         }
 
-        addConsole("出撃を更新しました");
+        addConsole("Sortie updated");
     }
 
     /**

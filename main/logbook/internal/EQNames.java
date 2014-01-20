@@ -85,8 +85,8 @@ public final class EQNames {
             this.put("カ号観測機", "Type Ka Liaison Aircraft");
             this.put("三式指揮連絡機(対潜)", "Type 3 Liaison Aircraft");
             this.put("10cm連装高角砲(砲架)", "Improved 10cm High-angle Cannon");
-            this.put("72", "UNKNOWN");
-            this.put("73", "UNKNOWN");
+            this.put("増設バルジ(中型艦)", "Anti-Torpedo Bulge (M)");
+            this.put("増設バルジ(大型艦)", "Anti-Torpedo Bulge (L)");
             this.put("74", "UNKNOWN");
             this.put("75", "UNKNOWN");
             this.put("76", "UNKNOWN");

@@ -187,7 +187,7 @@ public final class ConfigDialog extends Dialog {
 
         final Button checkDoit = new Button(compositeSystem, SWT.CHECK);
         checkDoit.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 3, 1));
-        checkDoit.setText("終了時に確認する");
+        checkDoit.setText("Confirm on exit");
         checkDoit.setSelection(AppConfig.get().isCheckDoit());
 
         // 艦隊タブ タブ
@@ -196,7 +196,7 @@ public final class ConfigDialog extends Dialog {
         compositeFleetTab.setLayout(new GridLayout(1, false));
 
         Label Fleetdesc = new Label(compositeFleetTab, SWT.NONE);
-        Fleetdesc.setText("Display warning icon if:");
+        Fleetdesc.setText("Display warning if:");
 
         final Button warnByNeedSupply = new Button(compositeFleetTab, SWT.CHECK);
         warnByNeedSupply.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1));
@@ -220,12 +220,12 @@ public final class ConfigDialog extends Dialog {
 
         final Button visibleOnReturnMission = new Button(compositeFleetTab, SWT.CHECK);
         visibleOnReturnMission.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1));
-        visibleOnReturnMission.setText("遠征からの帰還時に母港タブを表示");
+        visibleOnReturnMission.setText("Switch to HQ tab if expedition is completed");
         visibleOnReturnMission.setSelection(AppConfig.get().isVisibleOnReturnMission());
 
         final Button visibleOnReturnBathwater = new Button(compositeFleetTab, SWT.CHECK);
         visibleOnReturnBathwater.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1));
-        visibleOnReturnBathwater.setText("お風呂から上がる時に母港タブを表示");
+        visibleOnReturnBathwater.setText("Switch to HQ tab if repair is completed");
         visibleOnReturnBathwater.setSelection(AppConfig.get().isVisibleOnReturnBathwater());
 
         // キャプチャ タブ

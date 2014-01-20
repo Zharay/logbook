@@ -62,7 +62,7 @@ public final class SelectVisibleColumnDialog extends Dialog {
     private void createContents() {
         this.shell = new Shell(this.getParent(), SWT.SHELL_TRIM | SWT.PRIMARY_MODAL);
         this.shell.setSize(300, 275);
-        this.shell.setText("列の表示非表示");
+        this.shell.setText("Columns");
         this.shell.setLayout(new FillLayout(SWT.HORIZONTAL));
 
         // ヘッダー

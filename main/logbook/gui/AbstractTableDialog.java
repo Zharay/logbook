@@ -119,7 +119,7 @@ public abstract class AbstractTableDialog extends Dialog {
         reload.addSelectionListener(new TableReloadAdapter());
 
         MenuItem selectVisible = new MenuItem(this.opemenu, SWT.NONE);
-        selectVisible.setText("列の表示・非表示(&V)");
+        selectVisible.setText("&Select Columns...");
         selectVisible.addSelectionListener(new SelectVisibleColumnAdapter());
 
         // テーブル右クリックメニュー

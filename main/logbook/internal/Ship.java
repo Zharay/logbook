@@ -19,7 +19,7 @@ public class Ship {
         {
             this.put("1", new ShipInfoDto("Mutsuki", "DD", "Mutsuki", 20, 15, 15));
             this.put("2", new ShipInfoDto("Kisaragi", "DD", "Kisaragi", 20, 15, 15));
-            this.put("3", ShipInfoDto.EMPTY);
+            this.put("3", new ShipInfoDto("Naka Christmas", "CL", "Naka", 0, 30, 25));
             this.put("4", ShipInfoDto.EMPTY);
             this.put("5", ShipInfoDto.EMPTY);
             this.put("6", new ShipInfoDto("Nagatsuki", "DD", "Nagatsuki", 20, 15, 15));
@@ -176,7 +176,7 @@ public class Ship {
             this.put("157", ShipInfoDto.EMPTY);
             this.put("158", ShipInfoDto.EMPTY);
             this.put("159", ShipInfoDto.EMPTY);
-            this.put("160", ShipInfoDto.EMPTY);
+            this.put("160", new ShipInfoDto("Naka Kai2", "CL", "Naka", 0, 35, 25));
             this.put("161", new ShipInfoDto("Akitsu Maru", "LHA", "Akitsu Maru", 25, 10, 40));
             this.put("162", ShipInfoDto.EMPTY);
             this.put("163", new ShipInfoDto("Maruyu", "SS", "Maruyu", 20, 5, 10));
