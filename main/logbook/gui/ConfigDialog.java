@@ -12,6 +12,8 @@ import java.util.Map.Entry;
 
 import logbook.config.AppConfig;
 import logbook.gui.logic.LayoutLogic;
+import logbook.internal.EvaluateExp;
+import logbook.internal.SeaExp;
 
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.swt.SWT;
@@ -29,6 +31,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Dialog;
 import org.eclipse.swt.widgets.DirectoryDialog;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
@@ -75,7 +78,7 @@ public final class ConfigDialog extends Dialog {
      */
     private void createContents() {
         this.shell = new Shell(this.getParent(), this.getStyle());
-        this.shell.setSize(470, 320);
+        this.shell.setSize(530, 320);
         this.shell.setText(this.getText());
         this.shell.setLayout(new GridLayout(1, false));
 
@@ -196,26 +199,58 @@ public final class ConfigDialog extends Dialog {
         compositeFleetTab.setLayout(new GridLayout(1, false));
 
         Label Fleetdesc = new Label(compositeFleetTab, SWT.NONE);
-        Fleetdesc.setText("Display warning if:");
+        Fleetdesc.setText("Notification Settings");
+
+        Group leveling = new Group(compositeFleetTab, SWT.NONE);
+        leveling.setText("Leveling");
+        leveling.setLayout(new RowLayout());
+        leveling.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+
+        final Button displaycount = new Button(leveling, SWT.CHECK);
+        displaycount.setText("Show finish count");
+        displaycount.setSelection(AppConfig.get().isDisplayCount());
+
+        Label label9 = new Label(leveling, SWT.NONE);
+        label9.setText("Sea");
+        final Combo seacombo = new Combo(leveling, SWT.READ_ONLY);
+        int count = 0;
+        for (Entry<String, Integer> entry : SeaExp.get().entrySet()) {
+            seacombo.add(entry.getKey());
+            if (entry.getKey().equals(AppConfig.get().getDefaultSea())) {
+                seacombo.select(count);
+            }
+            count++;
+        }
+        Label label10 = new Label(leveling, SWT.NONE);
+        label10.setText("Evaluation");
+        final Combo evalcombo = new Combo(leveling, SWT.READ_ONLY);
+        count = 0;
+        for (Entry<String, Double> entry : EvaluateExp.get().entrySet()) {
+            evalcombo.add(entry.getKey());
+            if (entry.getKey().equals(AppConfig.get().getDefaultEvaluate())) {
+                evalcombo.select(count);
+            }
+            count++;
+        }
 
         final Button warnByNeedSupply = new Button(compositeFleetTab, SWT.CHECK);
         warnByNeedSupply.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1));
-        warnByNeedSupply.setText("insufficient supplies");
+        warnByNeedSupply.setText("Insufficient supplies");
         warnByNeedSupply.setSelection(AppConfig.get().isWarnByNeedSupply());
 
         final Button warnByCondState = new Button(compositeFleetTab, SWT.CHECK);
         warnByCondState.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1));
-        warnByCondState.setText("low morale");
+        warnByCondState.setText("Low morale");
         warnByCondState.setSelection(AppConfig.get().isWarnByCondState());
 
         final Button warnByHalfDamage = new Button(compositeFleetTab, SWT.CHECK);
         warnByHalfDamage.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1));
-        warnByHalfDamage.setText("moderately damaged");
+        warnByHalfDamage.setText("Moderately damaged");
         warnByHalfDamage.setSelection(AppConfig.get().isWarnByHalfDamage());
 
         final Button fatalBybadlyDamage = new Button(compositeFleetTab, SWT.CHECK);
         fatalBybadlyDamage.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1));
-        fatalBybadlyDamage.setText("severely damaged");
+        fatalBybadlyDamage.setText("Severely damaged");
         fatalBybadlyDamage.setSelection(AppConfig.get().isFatalBybadlyDamage());
 
         final Button visibleOnReturnMission = new Button(compositeFleetTab, SWT.CHECK);
@@ -322,6 +357,9 @@ public final class ConfigDialog extends Dialog {
                 AppConfig.get().setReportPath(reportDir.getText());
                 AppConfig.get().setCheckUpdate(checkUpdate.getSelection());
                 // fleettab
+                AppConfig.get().setDisplayCount(displaycount.getSelection());
+                AppConfig.get().setDefaultSea(seacombo.getItem(seacombo.getSelectionIndex()));
+                AppConfig.get().setDefaultEvaluate(evalcombo.getItem(evalcombo.getSelectionIndex()));
                 AppConfig.get().setWarnByNeedSupply(warnByNeedSupply.getSelection());
                 AppConfig.get().setWarnByCondState(warnByCondState.getSelection());
                 AppConfig.get().setWarnByHalfDamage(warnByHalfDamage.getSelection());

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<java version="1.7.0_45" class="java.beans.XMLDecoder">
+<java version="1.7.0_51" class="java.beans.XMLDecoder">
  <object class="logbook.config.bean.AppConfigBean">
   <void property="locationX">
    <int>8</int>

@@ -203,7 +203,7 @@ public final class ApplicationMain {
                 Point location = ApplicationMain.this.shell.getLocation();
                 AppConfig.get().setLocationX(location.x);
                 AppConfig.get().setLocationY(location.y);
-                if (AppConfig.get().isMinimumLayout()) {
+                if (!AppConfig.get().isMinimumLayout()) {
                     AppConfig.get().setWidth(ApplicationMain.this.shell.getSize().x);
                     AppConfig.get().setHeight(ApplicationMain.this.shell.getSize().y);
                 }
@@ -410,7 +410,7 @@ public final class ApplicationMain {
         this.deckNotice.setText("Notify me 1 minute early");
 
         this.deck1name = new Label(this.deckGroup, SWT.NONE);
-        this.deck1name.setText("ここに艦隊2の艦隊名が入ります");
+        this.deck1name.setText("Name of fleet 2 goes here");
         this.deck1name.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
         this.deck1time = new Text(this.deckGroup, SWT.SINGLE | SWT.BORDER);
@@ -420,7 +420,7 @@ public final class ApplicationMain {
         this.deck1time.setLayoutData(gddeck1time);
 
         this.deck2name = new Label(this.deckGroup, SWT.NONE);
-        this.deck2name.setText("ここに艦隊3の艦隊名が入ります");
+        this.deck2name.setText("Name of fleet 3 goes here");
         this.deck2name.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
         this.deck2time = new Text(this.deckGroup, SWT.SINGLE | SWT.BORDER);
@@ -430,7 +430,7 @@ public final class ApplicationMain {
         this.deck2time.setLayoutData(gddeck2time);
 
         this.deck3name = new Label(this.deckGroup, SWT.NONE);
-        this.deck3name.setText("ここに艦隊4の艦隊名が入ります");
+        this.deck3name.setText("Name of fleet 4 goes here");
         this.deck3name.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
         this.deck3time = new Text(this.deckGroup, SWT.SINGLE | SWT.BORDER);

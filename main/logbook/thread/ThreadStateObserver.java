@@ -47,8 +47,8 @@ public final class ThreadStateObserver extends Thread {
                         sb.append("[");
                         sb.append(target.getName());
                         sb.append("]");
-                        sb.append("が予期せず終了しました、エラーログを確認して下さい。\n");
-                        sb.append("補足した例外:\n");
+                        sb.append("Terminated unexpectedly and error logged.\n");
+                        sb.append("Exception:\n");
                         sb.append(ThreadManager.getUncaughtExceptionHandler(target));
 
                         final String message = sb.toString();
@@ -57,7 +57,7 @@ public final class ThreadStateObserver extends Thread {
                             public void run() {
                                 MessageBox box = new MessageBox(ThreadStateObserver.this.shell, SWT.YES
                                         | SWT.ICON_ERROR);
-                                box.setText("スレッドが予期せず終了しました");
+                                box.setText("Ended the thread unexpectedly.");
                                 box.setMessage(message);
                                 box.open();
                             }

@@ -174,19 +174,19 @@ public final class CreateReportLogic {
      * @return ヘッダー
      */
     public static String[] getBattleResultStoreHeader() {
-        return new String[] { "", "日付", "海域", "ランク", "敵艦隊", "ドロップ艦種", "ドロップ艦娘",
-                "味方艦1", "味方艦1HP",
-                "味方艦2", "味方艦2HP",
-                "味方艦3", "味方艦3HP",
-                "味方艦4", "味方艦4HP",
-                "味方艦5", "味方艦5HP",
-                "味方艦6", "味方艦6HP",
-                "敵艦1", "敵艦1HP",
-                "敵艦2", "敵艦2HP",
-                "敵艦3", "敵艦3HP",
-                "敵艦4", "敵艦4HP",
-                "敵艦5", "敵艦5HP",
-                "敵艦6", "敵艦6HP" };
+        return new String[] { "", "EXP", "Sea", "Rank", "Enemy Fleet", "Drop Type", "Ship Girl",
+                "Ship1", "Ship1HP",
+                "Ship2", "Ship2HP",
+                "Ship3", "Ship3HP",
+                "Ship4", "Ship4HP",
+                "Ship5", "Ship5HP",
+                "Ship6", "Ship6HP",
+                "Enemy1", "Enemy1 HP",
+                "Enemy2", "Enemy2 HP",
+                "Enemy3", "Enemy3 HP",
+                "Enemy4", "Enemy4 HP",
+                "Enemy5", "Enemy5 HP",
+                "Enemy6", "Enemy6 HP" };
     }
 
     /**
@@ -254,7 +254,7 @@ public final class CreateReportLogic {
      */
     public static String[] getCreateShipHeader() {
         return new String[] { "", "Time", "Craft Type", "Name", "Type", "Fuel", "Ammo", "Steel", "Bauxite",
-                "Dev Material", "空きドック", "Secretary", "HQ Lv" };
+                "Dev Material", "Empty Dock", "Secretary", "HQ Lv" };
     }
 
     /**

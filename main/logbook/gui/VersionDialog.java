@@ -93,7 +93,7 @@ public final class VersionDialog extends Dialog {
         });
         Label labelcomment = new Label(versionGroup, SWT.NONE);
         Label labelcomment2 = new Label(versionGroup, SWT.NONE);
-        labelcomment.setText("Translated by silfumus");
+        labelcomment.setText("Translated by\nsilfumus/Zharay");
         labelcomment2.setText("with the help of /jp/sies.");
 
         // 設定

@@ -44,7 +44,7 @@ public final class ProxyServer extends Thread {
             this.server.start();
             this.server.join();
         } catch (Exception e) {
-            LOG.fatal("サーバーの起動に失敗しました", e);
+            LOG.fatal("Failed to start server.", e);
             throw new RuntimeException(e);
         }
     }

@@ -165,8 +165,8 @@ public final class CreatePacFileDialog extends Dialog {
             if (filename != null) {
                 if (!StringUtils.isAsciiPrintable(filename)) {
                     MessageBox messageBox = new MessageBox(this.shell, SWT.ICON_WARNING);
-                    messageBox.setText("注意");
-                    messageBox.setMessage("保存先にASCII範囲外の文字(全角文字等)が含まれています。\nこのアドレスはInternetExplorerで読み込めません。");
+                    messageBox.setText("Note");
+                    messageBox.setMessage("Characters outside the ASCII range is the address.\nInternet Explorer cannot read it.");
                     messageBox.open();
                 }
 

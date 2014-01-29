@@ -46,7 +46,7 @@ public final class FullScreenDialog extends Dialog {
      */
     public FullScreenDialog(Shell parent, Image image) {
         super(parent, SWT.NO_TRIM);
-        this.setText("矩形選択");
+        this.setText("Rectangle Select");
 
         this.image = image;
     }
