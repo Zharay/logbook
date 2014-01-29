@@ -102,7 +102,10 @@ public final class GlobalConfig {
     public static final URI HOME_PAGE_URI = URI.create("http://kancolle.sanaechan.net/");
 
     /** アップデートチェック先 */
-    public static final URI UPDATE_CHECK_URI = URI.create("http://kancolle.sanaechan.net/checkversion.txt");
+    public static final URI UPDATE_CHECK_URI = URI.create("https://raw.github.com/Zharay/logbook/master/checkversion.txt");
+
+    /** GitHub Translation */
+    public static final URI GITHUB_PAGE_URI = URI.create("https://github.com/Zharay/logbook");
 
     /** ロガー */
     private static final Logger LOG = LogManager.getLogger(GlobalConfig.class);

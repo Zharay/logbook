@@ -91,6 +91,19 @@ public final class VersionDialog extends Dialog {
                 }
             }
         });
+        Link gogithub = new Link(versionGroup, SWT.NONE);
+        gogithub.setLayoutData(new GridData(GridData.FILL_HORIZONTAL, SWT.CENTER, false, false, 2, 1));
+        gogithub.setText("<a>GitHub Translation Page</a>");
+        gogithub.addSelectionListener(new SelectionAdapter() {
+            @Override
+            public void widgetSelected(SelectionEvent event) {
+                try {
+                    Desktop.getDesktop().browse(AppConstants.GITHUB_PAGE_URI);
+                } catch (Exception e) {
+                    LOG.warn("Failed to open the link", e);
+                }
+            }
+        });
         Label labelcomment = new Label(versionGroup, SWT.NONE);
         Label labelcomment2 = new Label(versionGroup, SWT.NONE);
         labelcomment.setText("Translated by\nsilfumus/Zharay");
