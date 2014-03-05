@@ -36,6 +36,9 @@ public class ItemType {
             this.put("20", "Landing Craft");
             this.put("21", "Autogyro");
             this.put("22", "Liaison Airplane");
+            this.put("23", "Additional Armor");
+            this.put("24", "Searchlight");
+            this.put("25", "Transport Support");
         }
     };
 

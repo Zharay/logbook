@@ -287,6 +287,18 @@ public final class ApplicationMain {
         cmdbathwaterlist.addSelectionListener(new BathwaterTableAdapter(this.shell));
         // セパレータ
         new MenuItem(cmdmenu, SWT.SEPARATOR);
+        // コマンド-任務一覧
+        MenuItem questlist = new MenuItem(cmdmenu, SWT.NONE);
+        questlist.setText("Mission &List\tCtrl+L");
+        questlist.setAccelerator(SWT.CTRL + 'L');
+        questlist.addSelectionListener(new SelectionAdapter() {
+            @Override
+            public void widgetSelected(SelectionEvent e) {
+                new QuestTable(ApplicationMain.this.shell).open();
+            }
+        });
+        // セパレータ
+        new MenuItem(cmdmenu, SWT.SEPARATOR);
         // 表示-縮小表示
         final MenuItem dispsize = new MenuItem(cmdmenu, SWT.CHECK);
         dispsize.setText("&Mini-size\tCtrl+M");
@@ -414,7 +426,7 @@ public final class ApplicationMain {
         this.deck1name.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
         this.deck1time = new Text(this.deckGroup, SWT.SINGLE | SWT.BORDER);
-        this.deck1time.setText("艦隊2の帰投時間");
+        this.deck1time.setText("Return time of fleet 2");
         GridData gddeck1time = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
         gddeck1time.widthHint = 75;
         this.deck1time.setLayoutData(gddeck1time);
@@ -424,7 +436,7 @@ public final class ApplicationMain {
         this.deck2name.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
         this.deck2time = new Text(this.deckGroup, SWT.SINGLE | SWT.BORDER);
-        this.deck2time.setText("艦隊3の帰投時間");
+        this.deck2time.setText("Return time of fleet 3");
         GridData gddeck2time = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
         gddeck2time.widthHint = 75;
         this.deck2time.setLayoutData(gddeck2time);
@@ -434,7 +446,7 @@ public final class ApplicationMain {
         this.deck3name.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
         this.deck3time = new Text(this.deckGroup, SWT.SINGLE | SWT.BORDER);
-        this.deck3time.setText("艦隊4の帰投時間");
+        this.deck3time.setText("Return time of fleet 4");
         GridData gddeck3time = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
         gddeck3time.widthHint = 75;
         this.deck3time.setLayoutData(gddeck3time);
@@ -464,41 +476,41 @@ public final class ApplicationMain {
         });
 
         this.ndock1name = new Label(this.ndockGroup, SWT.NONE);
-        this.ndock1name.setText("ドッグ1に浸かっている艦娘の名前");
+        this.ndock1name.setText("Repair Dock 1");
         this.ndock1name.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
         this.ndock1time = new Text(this.ndockGroup, SWT.SINGLE | SWT.BORDER);
-        this.ndock1time.setText("お風呂から上がる時間");
+        this.ndock1time.setText("Time Remaining");
         GridData gdndock1time = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
         gdndock1time.widthHint = 75;
         this.ndock1time.setLayoutData(gdndock1time);
 
         this.ndock2name = new Label(this.ndockGroup, SWT.NONE);
-        this.ndock2name.setText("ドッグ2に浸かっている艦娘の名前");
+        this.ndock2name.setText("Repair Dock 2");
         this.ndock2name.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
         this.ndock2time = new Text(this.ndockGroup, SWT.SINGLE | SWT.BORDER);
-        this.ndock2time.setText("お風呂から上がる時間");
+        this.ndock2time.setText("Time Remaining");
         GridData gdndock2time = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
         gdndock2time.widthHint = 75;
         this.ndock2time.setLayoutData(gdndock2time);
 
         this.ndock3name = new Label(this.ndockGroup, SWT.NONE);
-        this.ndock3name.setText("ドッグ3に浸かっている艦娘の名前");
+        this.ndock3name.setText("Repair Dock 3");
         this.ndock3name.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
         this.ndock3time = new Text(this.ndockGroup, SWT.SINGLE | SWT.BORDER);
-        this.ndock3time.setText("お風呂から上がる時間");
+        this.ndock3time.setText("Time Remaining");
         GridData gdndock3time = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
         gdndock3time.widthHint = 75;
         this.ndock3time.setLayoutData(gdndock3time);
 
         this.ndock4name = new Label(this.ndockGroup, SWT.NONE);
-        this.ndock4name.setText("ドッグ4に浸かっている艦娘の名前");
+        this.ndock4name.setText("Repair Dock 4");
         this.ndock4name.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
         this.ndock4time = new Text(this.ndockGroup, SWT.SINGLE | SWT.BORDER);
-        this.ndock4time.setText("お風呂から上がる時間");
+        this.ndock4time.setText("Time Remaining");
         GridData gdndock4time = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
         gdndock4time.widthHint = 75;
         this.ndock4time.setLayoutData(gdndock4time);

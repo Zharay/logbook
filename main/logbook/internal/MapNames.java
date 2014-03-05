@@ -36,7 +36,7 @@ public final class MapNames {
             this.put("観音崎沖", "E-1 Arpeggio");
             this.put("硫黄島周辺海域", "E-2 Arpeggio");
             this.put("中部太平洋海域", "E-3 Arpeggio");
-            this.put("23", "<UNKNOWN>");
+            this.put("サーモン海域", "5-4");
             this.put("24", "<UNKNOWN>");
             this.put("25", "<UNKNOWN>");
             this.put("26", "<UNKNOWN>");

@@ -87,8 +87,8 @@ public final class EQNames {
             this.put("10cm連装高角砲(砲架)", "Improved 10cm High-angle Cannon");
             this.put("増設バルジ(中型艦)", "Anti-Torpedo Bulge (M)");
             this.put("増設バルジ(大型艦)", "Anti-Torpedo Bulge (L)");
-            this.put("74", "UNKNOWN");
-            this.put("75", "UNKNOWN");
+            this.put("探照灯", "Searchlight");
+            this.put("ドラム缶(輸送用)", "Drum (Transport)");
             this.put("76", "UNKNOWN");
             this.put("77", "UNKNOWN");
             this.put("78", "UNKNOWN");

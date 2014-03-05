@@ -84,7 +84,7 @@ public class ConfigMigration {
                 SHIP_CONFIG_FILE.delete();
             }
         } catch (Exception e) {
-            LOG.fatal("設定ファイルの移行に失敗しました", e);
+            LOG.fatal("Failed in migrating config file.", e);
         }
     }
 
@@ -121,7 +121,7 @@ public class ConfigMigration {
                 }
             }
         } catch (Exception e) {
-            LOG.fatal("設定ファイルの読み込みに失敗しました", e);
+            LOG.fatal("Failed to read config file.", e);
         }
         return properties;
     }

@@ -5,6 +5,7 @@
  */
 package logbook.gui;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -78,7 +79,7 @@ public final class ConfigDialog extends Dialog {
      */
     private void createContents() {
         this.shell = new Shell(this.getParent(), this.getStyle());
-        this.shell.setSize(530, 320);
+        this.shell.setSize(500, 360);
         this.shell.setText(this.getText());
         this.shell.setLayout(new GridLayout(1, false));
 
@@ -172,6 +173,16 @@ public final class ConfigDialog extends Dialog {
             }
         });
         reportSavedirBtn.setText("Select");
+
+        final Button remind = new Button(compositeSystem, SWT.CHECK);
+        remind.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 3, 1));
+        remind.setText("Expedition return reminder notification (Every 3 minutes)");
+        remind.setSelection(AppConfig.get().isMissionRemind());
+
+        final Button balloon = new Button(compositeSystem, SWT.CHECK);
+        balloon.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 3, 1));
+        balloon.setText("Notify when an expedition returns");
+        balloon.setSelection(AppConfig.get().isUseBalloon());
 
         final Button hidewindow = new Button(compositeSystem, SWT.CHECK);
         hidewindow.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 3, 1));
@@ -356,6 +367,8 @@ public final class ConfigDialog extends Dialog {
                 }
                 AppConfig.get().setReportPath(reportDir.getText());
                 AppConfig.get().setCheckUpdate(checkUpdate.getSelection());
+                AppConfig.get().setMissionRemind(remind.getSelection());
+                AppConfig.get().setUseBalloon(balloon.getSelection());
                 // fleettab
                 AppConfig.get().setDisplayCount(displaycount.getSelection());
                 AppConfig.get().setDefaultSea(seacombo.getItem(seacombo.getSelectionIndex()));
@@ -372,7 +385,7 @@ public final class ConfigDialog extends Dialog {
 
                 // development
                 AppConfig.get().setStoreJson(btnJson.getSelection());
-                AppConfig.get().setStoreJsonPath(jsonpath.getText());
+                AppConfig.get().setStoreJsonPath(new File(jsonpath.getText()).getAbsolutePath());
                 try {
                     AppConfig.store();
                 } catch (IOException ex) {

@@ -34,8 +34,8 @@ public final class Deck {
                 this.put("18", "Expedition 18");
                 this.put("19", "Expedition 19");
                 this.put("20", "Expedition 20");
-                this.put("21", "<UNKNOWN>");
-                this.put("22", "<UNKNOWN>");
+                this.put("21", "Expedition 21");
+                this.put("22", "Expedition 22");
                 this.put("23", "<UNKNOWN>");
                 this.put("24", "<UNKNOWN>");
                 this.put("25", "Expedition 25");
@@ -50,7 +50,7 @@ public final class Deck {
                 this.put("34", "Decisive Battle Support");
                 this.put("35", "Expedition 35");
                 this.put("36", "Expedition 36");
-                this.put("37", "<UNKNOWN>");
+                this.put("37", "Expedition 37");
                 this.put("38", "<UNKNOWN>");
                 this.put("39", "<UNKNOWN>");
                 this.put("40", "<UNKNOWN>");
