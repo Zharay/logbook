@@ -1,0 +1,18 @@
+========================
+	LogBook ChangeLog
+========================
+
+v0.5.8 r27 - 3/4/2014
+	* Merged from source: r276
+	* Error checking for files.
+	* New ships, items, quests, expeditions added.
+	* Updated ship resource costs.
+	* *New* Reminder notification for expedition fleets that have arrived.
+	* *New* Mission List
+	* EXP calculator updated for the new 150 level limit.
+
+v0.5.6 - 1/29/2014
+	* *NEW* You can now get notifications for each node completed during an expedition.
+	* Any and all text in Japanese has also been translated
+	* Updated the about page
+	* *FEATURE* Version checking through GitHub... text file first though.
