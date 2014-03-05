@@ -58,7 +58,7 @@ public final class AsyncExecUpdateCheck extends Thread {
                         // OKを押されたらホームページへ移動する
                         if (box.open() == SWT.YES) {
                             try {
-                                Desktop.getDesktop().browse(AppConstants.HOME_PAGE_URI);
+                                Desktop.getDesktop().browse(AppConstants.GITHUB_PAGE_URI);
                             } catch (Exception e) {
                                 LOG.warn("Failed to open the website", e);
                             }
