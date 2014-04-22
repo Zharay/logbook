@@ -100,7 +100,7 @@ public final class ConfigDialog extends Dialog {
         capture.setText("Capture");
         capture.setData("capture");
         TreeItem proxy = new TreeItem(systemroot, SWT.NONE);
-        proxy.setText("プロキシ");
+        proxy.setText("Proxy");
         proxy.setData("proxy");
         TreeItem development = new TreeItem(tree, SWT.NONE);
         development.setText("Developer");
@@ -181,7 +181,7 @@ public final class ConfigDialog extends Dialog {
 
         Label materialintervallabel = new Label(compositeSystem, SWT.NONE);
         materialintervallabel.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-        materialintervallabel.setText("資材ログ保存間隔(秒)");
+        materialintervallabel.setText("Material Log Interval (Seconds)");
 
         final Spinner materialintervalSpinner = new Spinner(compositeSystem, SWT.BORDER);
         materialintervalSpinner.setMaximum(60 * 60 * 24);
@@ -195,12 +195,12 @@ public final class ConfigDialog extends Dialog {
 
         final Button remind = new Button(compositeSystem, SWT.CHECK);
         remind.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 3, 1));
-        remind.setText("Expedition return reminder notification (Every 3 minutes)");
+        remind.setText("Expedition return reminder notification");
         remind.setSelection(AppConfig.get().isMissionRemind());
 
         Label intervallabel = new Label(compositeSystem, SWT.NONE);
         intervallabel.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-        intervallabel.setText("間隔(秒)");
+        intervallabel.setText("Inverval (Seconds)");
 
         final Spinner intervalSpinner = new Spinner(compositeSystem, SWT.BORDER);
         intervalSpinner.setMaximum(60 * 60);
@@ -359,12 +359,12 @@ public final class ConfigDialog extends Dialog {
 
         final Button useProxyButton = new Button(compositeProxy, SWT.CHECK);
         useProxyButton.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 4, 1));
-        useProxyButton.setText("接続にプロキシを使用する*");
+        useProxyButton.setText("To use a proxy to connect*");
         useProxyButton.setSelection(AppConfig.get().isUseProxy());
 
         Label proxyHostLabel = new Label(compositeProxy, SWT.NONE);
         proxyHostLabel.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-        proxyHostLabel.setText("ホスト:");
+        proxyHostLabel.setText("Host:");
 
         final Text proxyHostText = new Text(compositeProxy, SWT.BORDER);
         GridData gdProxyHostText = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
@@ -374,7 +374,7 @@ public final class ConfigDialog extends Dialog {
 
         Label proxyPortLabel = new Label(compositeProxy, SWT.NONE);
         proxyPortLabel.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-        proxyPortLabel.setText("ポート:");
+        proxyPortLabel.setText("Port:");
 
         final Spinner proxyPortSpinner = new Spinner(compositeProxy, SWT.BORDER);
         proxyPortSpinner.setMaximum(65535);

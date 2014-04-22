@@ -842,9 +842,9 @@ public final class GlobalContext {
                 materialLogLastUpdate = time;
             }
 
-            addConsole("保有資材を更新しました");
+            addConsole("Updated material count");
         } catch (Exception e) {
-            LOG.warn("保有資材を更新するに失敗しました", e);
+            LOG.warn("Failed to update material count!", e);
             LOG.warn(data);
         }
     }
@@ -1004,9 +1004,9 @@ public final class GlobalContext {
                     questMap.put(quest.getNo(), quest);
                 }
             }
-            addConsole("任務を更新しました");
+            addConsole("Missions updated");
         } catch (Exception e) {
-            LOG.warn("任務を更新しますに失敗しました", e);
+            LOG.warn("Failed to update missions!", e);
             LOG.warn(data);
         }
     }
@@ -1024,7 +1024,7 @@ public final class GlobalContext {
                 questMap.remove(id);
             }
         } catch (Exception e) {
-            LOG.warn("消化した任務を除去しますに失敗しました", e);
+            LOG.warn("Failed to clear quests", e);
             LOG.warn(data);
         }
     }

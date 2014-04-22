@@ -566,7 +566,8 @@ public final class CreateReportLogic {
      * @return ヘッダー
      */
     public static String[] getMaterialHeader() {
-        return new String[] { "", "日付", "燃料", "弾薬", "鋼材", "ボーキ", "高速修復材", "高速建造材", "開発資材" };
+        return new String[] { "", "Date", "Fuel", "Ammo", "Steel", "Baux", "Instant Repair", "Instant Build",
+                "Development Material" };
     }
 
     /**
@@ -822,7 +823,7 @@ public final class CreateReportLogic {
         try {
             List<BattleResultDto> dtoList = Collections.singletonList(dto);
 
-            File report = getStoreFile("Drop Report.csv", "Drop Report2.csv");
+            File report = getStoreFile("Drop Log.csv", "Drop Log2.csv");
 
             CreateReportLogic.writeCsvStripFirstColumn(report,
                     CreateReportLogic.getBattleResultStoreHeader(),
@@ -841,7 +842,7 @@ public final class CreateReportLogic {
         try {
             List<GetShipDto> dtoList = Collections.singletonList(dto);
 
-            File report = getStoreFile("Build Report.csv", "Build Report2.csv");
+            File report = getStoreFile("Build Log.csv", "Build Log2.csv");
 
             CreateReportLogic.writeCsvStripFirstColumn(report,
                     CreateReportLogic.getCreateShipHeader(),
@@ -860,7 +861,7 @@ public final class CreateReportLogic {
         try {
             List<CreateItemDto> dtoList = Collections.singletonList(dto);
 
-            File report = getStoreFile("Craft Report.csv", "Craft Report2.csv");
+            File report = getStoreFile("Craft Log.csv", "Craft Log2.csv");
 
             CreateReportLogic.writeCsvStripFirstColumn(report,
                     CreateReportLogic.getCreateItemHeader(),
@@ -879,7 +880,7 @@ public final class CreateReportLogic {
         try {
             List<MissionResultDto> dtoList = Collections.singletonList(dto);
 
-            File report = getStoreFile("Expedition Report.csv", "Expedition Report2.csv");
+            File report = getStoreFile("Expedition Log.csv", "Expedition Log2.csv");
 
             CreateReportLogic.writeCsvStripFirstColumn(report,
                     CreateReportLogic.getCreateMissionResultHeader(),
@@ -898,13 +899,13 @@ public final class CreateReportLogic {
         try {
             List<MaterialDto> dtoList = Collections.singletonList(material);
 
-            File report = getStoreFile("資材ログ.csv", "資材ログ_alternativefile.csv");
+            File report = getStoreFile("Material Log.csv", "Material Log2.csv");
 
             CreateReportLogic.writeCsvStripFirstColumn(report,
                     CreateReportLogic.getMaterialHeader(),
                     CreateReportLogic.getMaterialStoreBody(dtoList), true);
         } catch (IOException e) {
-            LOG.warn("報告書の保存に失敗しました", e);
+            LOG.warn("Failed to save material report", e);
         }
     }
 
