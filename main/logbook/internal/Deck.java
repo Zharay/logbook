@@ -36,7 +36,7 @@ public final class Deck {
                 this.put("20", "Expedition 20");
                 this.put("21", "Expedition 21");
                 this.put("22", "Expedition 22");
-                this.put("23", "<UNKNOWN>");
+            this.put("23", "航空戦艦運用演習");
                 this.put("24", "<UNKNOWN>");
                 this.put("25", "Expedition 25");
                 this.put("26", "Expedition 26");
@@ -44,14 +44,14 @@ public final class Deck {
                 this.put("28", "Expedition 28");
                 this.put("29", "Expedition 29");
                 this.put("30", "Expedition 30");
-                this.put("31", "<UNKNOWN>");
+            this.put("31", "海外艦との接触");
                 this.put("32", "<UNKNOWN>");
                 this.put("33", "Vanguard Support");
                 this.put("34", "Decisive Battle Support");
                 this.put("35", "Expedition 35");
                 this.put("36", "Expedition 36");
                 this.put("37", "Expedition 37");
-                this.put("38", "<UNKNOWN>");
+            this.put("38", "東京急行(弐)");
                 this.put("39", "<UNKNOWN>");
                 this.put("40", "<UNKNOWN>");
                 this.put("41", "<UNKNOWN>");
