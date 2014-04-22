@@ -1,9 +1,7 @@
-このフォルダ遠征から帰投したときのサウンドファイルを置きます。
-サブフォルダ内のファイルも読み込みます。
+Place files for notification sounds here.
+Subfolders are also fine!
 
-読み込まれたファイルはランダム再生されます。
+A random file will picked to be played by logbook.
 
-サポートされているファイル形式は
-・16bit無圧縮wav (拡張子 .wav)
-です。
-Javaが対応してないのでこれだけです。
+Supported sound formats:
+ * 16bit uncompressed wav (Extension: .wav)

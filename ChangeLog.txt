@@ -2,6 +2,23 @@
 	LogBook ChangeLog
 ========================
 
+v0.5.12 - 4/22/2014
+	* Merged from source: r300
+	* *New* Expedition logging. Keeps track of your resources that are gained from each 
+		expedition.
+	* *New* Proxy connection settings. You can now connect to an outside proxy before
+		logbook's own proxy.
+	* *New* Sound notifications for being badly injured. 
+		Will randomly play a wav sound from "sound/badly/"
+		Side note: the rest of the sound folders are as follows:
+		"expedition", "dock"
+	* *New* Resource logging. You can now log in defined intervals your resource count.
+		This is saved to Material Log.csv
+	* You can now set a specified time in seconds before a returning fleet arrives to 
+		notify you of their return.
+	* Report files renamed to "[name] Log.csv"
+	* Updated translations (Up-to-date to right before the spring event)
+
 v0.5.8 r30 - 3/4/2014
 	* Merged from source: r276
 	* Error checking for files.
