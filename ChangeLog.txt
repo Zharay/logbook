@@ -2,6 +2,10 @@
 	LogBook ChangeLog
 ========================
 
+v0.5.12v2 - 4/22/2014
+	* Bug fixed the settings. Drop down menus were all not setting themselves right.
+	* Fixed the version check.
+
 v0.5.12 - 4/22/2014
 	* Merged from source: r300
 	* *New* Expedition logging. Keeps track of your resources that are gained from each 
