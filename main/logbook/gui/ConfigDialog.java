@@ -258,24 +258,33 @@ public final class ConfigDialog extends Dialog {
         label9.setText("Sea");
         final Combo seacombo = new Combo(leveling, SWT.READ_ONLY);
         int count = 0;
+        boolean foundSelection = false;
         for (Entry<String, Integer> entry : SeaExp.get().entrySet()) {
             seacombo.add(entry.getKey());
             if (entry.getKey().equals(AppConfig.get().getDefaultSea())) {
                 seacombo.select(count);
+                foundSelection = true;
             }
             count++;
         }
+        if (!foundSelection)
+            seacombo.select(0);
+
         Label label10 = new Label(leveling, SWT.NONE);
         label10.setText("Evaluation");
         final Combo evalcombo = new Combo(leveling, SWT.READ_ONLY);
         count = 0;
+        foundSelection = false;
         for (Entry<String, Double> entry : EvaluateExp.get().entrySet()) {
             evalcombo.add(entry.getKey());
             if (entry.getKey().equals(AppConfig.get().getDefaultEvaluate())) {
                 evalcombo.select(count);
+                foundSelection = true;
             }
             count++;
         }
+        if (!foundSelection)
+            evalcombo.select(0);
 
         final Button warnByNeedSupply = new Button(compositeFleetTab, SWT.CHECK);
         warnByNeedSupply.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1));
