@@ -2,6 +2,15 @@
 	LogBook ChangeLog
 ========================
 
+v0.5.12 r40 - 4/24/2014
+	* Merged from source: r302
+	* Preliminary Support for Spring Update
+	* New option to notify when ships are badly damaged 
+		(was on by default, now its toggleable)
+	* Added new ships to translation with semi-appropriate ammo/fuel costs.
+	* NOTE - Not everything is at 100% working order. Some things will only update once
+		you go to the main menu. This is likely how it will for a while.
+
 v0.5.12v2 - 4/22/2014
 	* Bug fixed the settings. Drop down menus were all not setting themselves right.
 	* Fixed the version check.
