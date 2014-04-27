@@ -8,6 +8,7 @@ package logbook.dto;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -63,13 +64,13 @@ public final class ShipDto extends AbstractDto {
     private final long dockmetal;
 
     /** 残弾 */
-    private final int bull;
+    private int bull;
 
     /** 弾Max */
     private final int bullmax;
 
     /** 残燃料 */
-    private final int fuel;
+    private int fuel;
 
     /** 燃料Max */
     private final int fuelmax;
@@ -298,6 +299,13 @@ public final class ShipDto extends AbstractDto {
     }
 
     /**
+     * @param bull 残弾
+     */
+    public void setBull(int bull) {
+        this.bull = bull;
+    }
+
+    /**
      * @return 燃料
      */
     public int getFuel() {
@@ -309,6 +317,13 @@ public final class ShipDto extends AbstractDto {
      */
     public int getFuelMax() {
         return this.fuelmax;
+    }
+
+    /**
+     * @param fuel 残燃料
+     */
+    public void setFuel(int fuel) {
+        this.fuel = fuel;
     }
 
     /**
@@ -372,6 +387,13 @@ public final class ShipDto extends AbstractDto {
             }
         }
         return items;
+    }
+
+    /**
+     * @return 装備ID
+     */
+    public List<Long> getItemId() {
+        return Collections.unmodifiableList(this.slot);
     }
 
     /**

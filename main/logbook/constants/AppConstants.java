@@ -18,7 +18,7 @@ import org.eclipse.swt.graphics.RGB;
 public class AppConstants {
 
     /** バージョン */
-    public static final String VERSION = "0.5.12 r40";
+    public static final String VERSION = "0.5.13";
 
     /** ホームページ */
     public static final URI HOME_PAGE_URI = URI.create("http://kancolle.sanaechan.net/");
@@ -95,6 +95,9 @@ public class AppConstants {
 
     /** 艦娘設定ファイル  */
     public static final File SHIP_CONFIG_FILE = new File("./config/ship.xml");
+
+    /** 装備設定ファイル  */
+    public static final File ITEM_CONFIG_FILE = new File("./config/item.xml");
 
     /** 建造ドック設定ファイル  */
     public static final File KDOCK_CONFIG_FILE = new File("./config/kdock.xml");

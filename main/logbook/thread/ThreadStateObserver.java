@@ -51,11 +51,12 @@ public final class ThreadStateObserver extends Thread {
 
                             StringBuilder sb = new StringBuilder();
                             sb.append(target.getClass().getName());
-                        	sb.append("[");
-                        	sb.append(target.getName());
-                        	sb.append("]");
+                            sb.append("[");
+                            sb.append(target.getName());
+                            sb.append("]");
                         	sb.append("Terminated unexpectedly and error logged.\n");
                         	sb.append("Exception:\n");
+                            sb.append(stackTrace);
 
                             final String message = sb.toString();
                             Display.getDefault().asyncExec(new Runnable() {

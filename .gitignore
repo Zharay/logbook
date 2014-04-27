@@ -214,3 +214,6 @@ pip-log.txt
 .mr.developer.cfg
 /Logbook-Compiled
 /*.lnk
+*.csv
+*.java
+*.rar

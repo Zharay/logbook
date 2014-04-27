@@ -242,9 +242,6 @@ public final class ConfigDialog extends Dialog {
         this.compositeMap.put("fleettab", compositeFleetTab);
         compositeFleetTab.setLayout(new GridLayout(1, false));
 
-        Label Fleetdesc = new Label(compositeFleetTab, SWT.NONE);
-        Fleetdesc.setText("Notification Settings");
-
         Group leveling = new Group(compositeFleetTab, SWT.NONE);
         leveling.setText("Leveling");
         leveling.setLayout(new RowLayout());
@@ -438,7 +435,7 @@ public final class ConfigDialog extends Dialog {
         commandLeft.setLayout(glCommandLeft);
 
         Label attentionLabel = new Label(commandLeft, SWT.NONE);
-        attentionLabel.setText("*再起動後に有効になります");
+        attentionLabel.setText("*Requires a restart");
 
         Composite commandRight = new Composite(commandComposite, SWT.NONE);
         RowLayout rlCommandRight = new RowLayout(SWT.HORIZONTAL);

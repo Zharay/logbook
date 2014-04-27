@@ -16,30 +16,34 @@ import logbook.internal.ItemType;
  */
 public final class ItemDto extends AbstractDto {
 
-    private final long type4;
-    private final long atap;
-    private final long bakk;
-    private final long baku;
-    private final long houg;
-    private final long houk;
-    private final long houm;
-    private final long id;
-    @Deprecated
-    private final long kaih = 0;
-    private final long leng;
-    private final long luck;
-    private final String name;
-    private final long raig;
-    private final long raik;
-    private final long raim;
-    private final long rare;
-    private final long sakb;
-    private final long saku;
-    private final long soku;
-    private final long souk;
-    private final long taik;
-    private final long tais;
-    private final long tyku;
+    private long id;
+    private long type4;
+    private long atap;
+    private long bakk;
+    private long baku;
+    private long houg;
+    private long houk;
+    private long houm;
+    private long leng;
+    private long luck;
+    private String name;
+    private long raig;
+    private long raik;
+    private long raim;
+    private long rare;
+    private long sakb;
+    private long saku;
+    private long soku;
+    private long souk;
+    private long taik;
+    private long tais;
+    private long tyku;
+
+    /**
+     * コンストラクター
+     */
+    public ItemDto() {
+    }
 
     /**
      * コンストラクター
@@ -74,6 +78,59 @@ public final class ItemDto extends AbstractDto {
     }
 
     /**
+     * コンストラクター
+     * 
+     * @param id
+     * @param type4
+     * @param atap
+     * @param bakk
+     * @param baku
+     * @param houg
+     * @param houk
+     * @param houm
+     * @param leng
+     * @param luck
+     * @param name
+     * @param raig
+     * @param raik
+     * @param raim
+     * @param rare
+     * @param sakb
+     * @param saku
+     * @param soku
+     * @param souk
+     * @param taik
+     * @param tais
+     * @param tyku
+     */
+    public ItemDto(long id, long type4, long atap, long bakk, long baku, long houg, long houk, long houm, long leng,
+            long luck, String name, long raig, long raik, long raim, long rare, long sakb, long saku, long soku,
+            long souk, long taik, long tais, long tyku) {
+        this.id = id;
+        this.type4 = type4;
+        this.atap = atap;
+        this.bakk = bakk;
+        this.baku = baku;
+        this.houg = houg;
+        this.houk = houk;
+        this.houm = houm;
+        this.leng = leng;
+        this.luck = luck;
+        this.name = name;
+        this.raig = raig;
+        this.raik = raik;
+        this.raim = raim;
+        this.rare = rare;
+        this.sakb = sakb;
+        this.saku = saku;
+        this.soku = soku;
+        this.souk = souk;
+        this.taik = taik;
+        this.tais = tais;
+        this.tyku = tyku;
+    }
+
+    /**
      * @return type
      */
     public String getType() {
@@ -88,6 +145,15 @@ public final class ItemDto extends AbstractDto {
     }
 
     /**
+     * type4を設定します。
+     * @param type4 type4
+     */
+    public void setType4(long type4) {
+        this.type4 = type4;
+    }
+
+    /**
+     * atapを取得します。
      * @return atap
      */
     public long getAtap() {
@@ -95,6 +161,15 @@ public final class ItemDto extends AbstractDto {
     }
 
     /**
+     * atapを設定します。
+     * @param atap atap
+     */
+    public void setAtap(long atap) {
+        this.atap = atap;
+    }
+
+    /**
+     * bakkを取得します。
      * @return bakk
      */
     public long getBakk() {
@@ -102,6 +177,15 @@ public final class ItemDto extends AbstractDto {
     }
 
     /**
+     * bakkを設定します。
+     * @param bakk bakk
+     */
+    public void setBakk(long bakk) {
+        this.bakk = bakk;
+    }
+
+    /**
+     * bakuを取得します。
      * @return baku
      */
     public long getBaku() {
@@ -109,6 +193,15 @@ public final class ItemDto extends AbstractDto {
     }
 
     /**
+     * bakuを設定します。
+     * @param baku baku
+     */
+    public void setBaku(long baku) {
+        this.baku = baku;
+    }
+
+    /**
+     * hougを取得します。
      * @return houg
      */
     public long getHoug() {
@@ -116,6 +209,15 @@ public final class ItemDto extends AbstractDto {
     }
 
     /**
+     * hougを設定します。
+     * @param houg houg
+     */
+    public void setHoug(long houg) {
+        this.houg = houg;
+    }
+
+    /**
+     * houkを取得します。
      * @return houk
      */
     public long getHouk() {
@@ -123,6 +225,15 @@ public final class ItemDto extends AbstractDto {
     }
 
     /**
+     * houkを設定します。
+     * @param houk houk
+     */
+    public void setHouk(long houk) {
+        this.houk = houk;
+    }
+
+    /**
+     * houmを取得します。
      * @return houm
      */
     public long getHoum() {
@@ -130,6 +241,15 @@ public final class ItemDto extends AbstractDto {
     }
 
     /**
+     * houmを設定します。
+     * @param houm houm
+     */
+    public void setHoum(long houm) {
+        this.houm = houm;
+    }
+
+    /**
+     * idを取得します。
      * @return id
      */
     public long getId() {
@@ -137,14 +257,15 @@ public final class ItemDto extends AbstractDto {
     }
 
     /**
-     * @return kaih
+     * idを設定します。
+     * @param id id
      */
-    @Deprecated
-    public long getKaih() {
-        return this.kaih;
+    public void setId(long id) {
+        this.id = id;
     }
 
     /**
+     * lengを取得します。
      * @return leng
      */
     public long getLeng() {
@@ -152,6 +273,15 @@ public final class ItemDto extends AbstractDto {
     }
 
     /**
+     * lengを設定します。
+     * @param leng leng
+     */
+    public void setLeng(long leng) {
+        this.leng = leng;
+    }
+
+    /**
+     * luckを取得します。
      * @return luck
      */
     public long getLuck() {
@@ -159,6 +289,15 @@ public final class ItemDto extends AbstractDto {
     }
 
     /**
+     * luckを設定します。
+     * @param luck luck
+     */
+    public void setLuck(long luck) {
+        this.luck = luck;
+    }
+
+    /**
+     * nameを取得します。
      * @return name
      */
     public String getName() {
@@ -173,6 +312,15 @@ public final class ItemDto extends AbstractDto {
     }
 
     /**
+     * nameを設定します。
+     * @param name name
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
+     * raigを取得します。
      * @return raig
      */
     public long getRaig() {
@@ -180,6 +328,15 @@ public final class ItemDto extends AbstractDto {
     }
 
     /**
+     * raigを設定します。
+     * @param raig raig
+     */
+    public void setRaig(long raig) {
+        this.raig = raig;
+    }
+
+    /**
+     * raikを取得します。
      * @return raik
      */
     public long getRaik() {
@@ -187,6 +344,15 @@ public final class ItemDto extends AbstractDto {
     }
 
     /**
+     * raikを設定します。
+     * @param raik raik
+     */
+    public void setRaik(long raik) {
+        this.raik = raik;
+    }
+
+    /**
+     * raimを取得します。
      * @return raim
      */
     public long getRaim() {
@@ -194,6 +360,15 @@ public final class ItemDto extends AbstractDto {
     }
 
     /**
+     * raimを設定します。
+     * @param raim raim
+     */
+    public void setRaim(long raim) {
+        this.raim = raim;
+    }
+
+    /**
+     * rareを取得します。
      * @return rare
      */
     public long getRare() {
@@ -201,6 +376,15 @@ public final class ItemDto extends AbstractDto {
     }
 
     /**
+     * rareを設定します。
+     * @param rare rare
+     */
+    public void setRare(long rare) {
+        this.rare = rare;
+    }
+
+    /**
+     * sakbを取得します。
      * @return sakb
      */
     public long getSakb() {
@@ -208,6 +392,15 @@ public final class ItemDto extends AbstractDto {
     }
 
     /**
+     * sakbを設定します。
+     * @param sakb sakb
+     */
+    public void setSakb(long sakb) {
+        this.sakb = sakb;
+    }
+
+    /**
+     * sakuを取得します。
      * @return saku
      */
     public long getSaku() {
@@ -215,6 +408,15 @@ public final class ItemDto extends AbstractDto {
     }
 
     /**
+     * sakuを設定します。
+     * @param saku saku
+     */
+    public void setSaku(long saku) {
+        this.saku = saku;
+    }
+
+    /**
+     * sokuを取得します。
      * @return soku
      */
     public long getSoku() {
@@ -222,6 +424,15 @@ public final class ItemDto extends AbstractDto {
     }
 
     /**
+     * sokuを設定します。
+     * @param soku soku
+     */
+    public void setSoku(long soku) {
+        this.soku = soku;
+    }
+
+    /**
+     * soukを取得します。
      * @return souk
      */
     public long getSouk() {
@@ -229,6 +440,15 @@ public final class ItemDto extends AbstractDto {
     }
 
     /**
+     * soukを設定します。
+     * @param souk souk
+     */
+    public void setSouk(long souk) {
+        this.souk = souk;
+    }
+
+    /**
+     * taikを取得します。
      * @return taik
      */
     public long getTaik() {
@@ -236,6 +456,15 @@ public final class ItemDto extends AbstractDto {
     }
 
     /**
+     * taikを設定します。
+     * @param taik taik
+     */
+    public void setTaik(long taik) {
+        this.taik = taik;
+    }
+
+    /**
+     * taisを取得します。
      * @return tais
      */
     public long getTais() {
@@ -243,10 +472,27 @@ public final class ItemDto extends AbstractDto {
     }
 
     /**
+     * taisを設定します。
+     * @param tais tais
+     */
+    public void setTais(long tais) {
+        this.tais = tais;
+    }
+
+    /**
+     * tykuを取得します。
      * @return tyku
      */
     public long getTyku() {
         return this.tyku;
+    }
+
+    /**
+     * tykuを設定します。
+     * @param tyku tyku
+     */
+    public void setTyku(long tyku) {
+        this.tyku = tyku;
     }
 
     @Override

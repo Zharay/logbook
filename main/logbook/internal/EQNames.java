@@ -73,7 +73,7 @@ public final class EQNames {
             this.put("彗星一二型甲", "Suisei Model 12A");
             this.put("61cm五連装(酸素)魚雷", "61cm Quintuple (Oxygen) Torpedo");
             this.put("零式水上観測機", "Zero Observation Seaplane");
-            this.put("零式艦戦62型", "Type 62 Zero Fighter-Bomber");
+            this.put("零式艦戦62型(爆戦)", "Type 62 Zero Fighter-Bomber");
             this.put("二式艦上偵察機", "Type 2 Recon Plane");
             this.put("試製晴嵐", "Prototype Seiran");
             this.put("12.7cm連装砲B型改二", "12.7cm Twin Cannon Type B Kai2");
@@ -134,6 +134,6 @@ public final class EQNames {
      * @return English name
      */
     public static String get(String jpname) {
-        return EQNAME.get(jpname);
+        return EQNAME.containsKey(jpname) ? EQNAME.get(jpname) : jpname;
     }
 }

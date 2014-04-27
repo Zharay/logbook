@@ -241,8 +241,7 @@ public final class AsyncExecApplicationMain extends Thread {
                         }
                         if (this.main.getDeckNotice().getSelection()) {
                             if ((rest <= ONE_MINUTES) && !FLAG_NOTICE_DECK[i]) {
-                                notice.add(deckMissions[i].getName() + " has returned from "
-                                        + deckMissions[i].getMission());
+                                notice.add(deckMissions[i].getName() + " has returned from " + deckMissions[i].getMission());
                                 noticeflg = true;
                                 FLAG_NOTICE_DECK[i] = true;
                             } else if (AppConfig.get().isMissionRemind() && (rest < -1)

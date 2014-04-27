@@ -227,12 +227,14 @@ public class FleetComposite extends Composite {
      * @param dock
      */
     public void updateFleet(DockDto dock) {
-        if (this.dock == dock) {
+        if ((this.dock == dock) && !this.dock.isUpdate()) {
             return;
         }
+
         this.getShell().setRedraw(false);
 
         this.dock = dock;
+        this.dock.setUpdate(false);
         this.state.set(WARN, false);
         this.state.set(FATAL, false);
         this.cond = 49;
@@ -458,7 +460,7 @@ public class FleetComposite extends Composite {
             StyleRange style = new StyleRange();
             style.fontStyle = SWT.BOLD;
             style.underline = true;
-            // style.underlineStyle = SWT.UNDERLINE_SQUIGGLE;
+            style.underlineStyle = SWT.UNDERLINE_SQUIGGLE;
             style.underlineColor = SWTResourceManager.getColor(SWT.COLOR_RED);
             style.foreground = SWTResourceManager.getColor(SWT.COLOR_RED);
             this.addStyledText(this.message,
@@ -506,12 +508,12 @@ public class FleetComposite extends Composite {
     private void postFatal() {
         if (this.badlyDamage && !this.state.get(POSTED_BADLY) && GlobalContext.isSortie(this.dock.getId())) {
             if (AppConfig.get().isBalloonBybadlyDamage()) {
-            ToolTip tip = new ToolTip(this.getShell(), SWT.BALLOON
-                    | SWT.ICON_ERROR);
+                ToolTip tip = new ToolTip(this.getShell(), SWT.BALLOON
+                        | SWT.ICON_ERROR);
             tip.setText("Warning");
-            tip.setMessage(AppConstants.MESSAGE_STOP_SORTIE);
-            this.main.getTrayItem().setToolTip(tip);
-            tip.setVisible(true);
+                tip.setMessage(AppConstants.MESSAGE_STOP_SORTIE);
+                this.main.getTrayItem().setToolTip(tip);
+                tip.setVisible(true);
             }
             // 大破時にサウンドを再生する
             Sound.randomBadlySoundPlay();

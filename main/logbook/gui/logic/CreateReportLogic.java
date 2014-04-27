@@ -255,8 +255,7 @@ public final class CreateReportLogic {
      * @return ヘッダー
      */
     public static String[] getCreateShipHeader() {
-        return new String[] { "", "Time", "Craft Type", "Name", "Type", "Fuel", "Ammo", "Steel", "Bauxite",
-                "Dev Material", "Empty Dock", "Secretary", "HQ Lv" };
+        return new String[] { "", "Time", "Craft Type", "Name", "Type", "Fuel", "Ammo", "Steel", "Bauxite", "Dev Material", "Empty Dock", "Secretary", "HQ Lv" };
     }
 
     /**
@@ -315,8 +314,7 @@ public final class CreateReportLogic {
      * @return ヘッダー
      */
     public static String[] getItemListHeader() {
-        return new String[] { "", "Name", "Type", "Qty", "Firepower", "Accuracy", "Evasion", "Range", "Luck", "Bomber",
-                "Torpedo", "LOS", "ASW", "AA" };
+        return new String[] { "", "Name", "Type", "Qty", "Firepower", "Accuracy", "Range", "Luck", "Bomber", "Torpedo", "LOS", "ASW", "AA" };
     }
 
     /**
@@ -354,7 +352,7 @@ public final class CreateReportLogic {
             ItemDto item = entry.getKey();
             count++;
             body.add(new Object[] { count, item.getENName(), item.getType(), entry.getValue(), item.getHoug(),
-                    item.getHoum(), item.getKaih(), item.getLeng(), item.getLuck(), item.getBaku(), item.getRaig(),
+                    item.getHoum(), item.getLeng(), item.getLuck(), item.getBaku(), item.getRaig(),
                     item.getSaku(), item.getTais(), item.getTyku()
             });
         }
@@ -367,10 +365,8 @@ public final class CreateReportLogic {
      * @return ヘッダー
      */
     public static String[] getShipListHeader() {
-        return new String[] { "", "ID", "Fleet", "Name", "Type", "Morale", "Recovery", "Lv", "Next", "Exp",
-                "Air Superiority", "Equipment 1", "Equipment 2",
-                "Equipment 3", "Equipment 4", "HP", "Firepower", "Torpedo", "AA", "Armor", "Evasion", "ASW", "LOS",
-                "Luck" };
+        return new String[] { "", "ID", "Fleet", "Name", "Type", "Morale", "Recovery", "Lv", "Next", "Exp", "Air Superiority", "Equipment 1", "Equipment 2",
+                "Equipment 3", "Equipment 4", "HP", "Firepower", "Torpedo", "AA", "Armor", "ASW", "LOS", "Luck" };
     }
 
     /**
@@ -443,7 +439,6 @@ public final class CreateReportLogic {
                         karyoku += item.getHoug();
                         raisou += item.getRaig();
                         taiku += item.getTyku();
-                        kaihi += item.getKaih();
                         taisen += item.getTais();
                         sakuteki += item.getSaku();
                         lucky += item.getLuck();
@@ -566,8 +561,7 @@ public final class CreateReportLogic {
      * @return ヘッダー
      */
     public static String[] getMaterialHeader() {
-        return new String[] { "", "Date", "Fuel", "Ammo", "Steel", "Baux", "Instant Repair", "Instant Build",
-                "Development Material" };
+        return new String[] { "", "Date", "Fuel", "Ammo", "Steel", "Baux", "Instant Repair", "Instant Build", "Development Material" };
     }
 
     /**
