@@ -2,6 +2,18 @@
 	LogBook ChangeLog
 ========================
 
+v0.5.13 - 4/27/2014
+	* Merge from r311
+	* New ships *should* be in. Report any missing ships on GitHub or on my twitter!
+	* New items may also need to be reported to me if they are missing still.
+	* Fixed items so that they will display the original Japanese name if they do not 
+		have a translation.
+	* The updating of equipment, materials, ships, expeditions, destruction of items 
+		and ships have all been updated for the never version of Kancolle.
+	* Logbook can now save the information of the equipment you hold (internally)
+	* The option to notify on certain conditions map win conditions should now be 
+		working.
+ 
 v0.5.12 r40 - 4/24/2014
 	* Merged from source: r302
 	* Preliminary Support for Spring Update
