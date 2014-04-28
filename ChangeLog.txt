@@ -2,6 +2,14 @@
 	LogBook ChangeLog
 ========================
 
+v0.5.14 - 4/28/2014
+	* Merge from r317
+	* Air control calculations do not account for recon planes any more.
+	* Fix for ships disappearing when you remove equipment.
+	* Fix for ships that are swapped between fleets not updating.
+	* All ships should now be translated. If they are not for you, please delete
+		the config folder!
+
 v0.5.13 - 4/27/2014
 	* Merge from r311
 	* New ships *should* be in. Report any missing ships on GitHub or on my twitter!

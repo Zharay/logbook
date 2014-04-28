@@ -39,6 +39,7 @@ public class ItemType {
             this.put("23", "Additional Armor");
             this.put("24", "Searchlight");
             this.put("25", "Transport Support");
+            this.put("26", "Ship Repair Facility");
         }
     };
 

@@ -517,6 +517,10 @@ public final class GlobalContext {
 
                 DockDto newdock = new DockDto(dockdto.getId(), dockdto.getName());
                 if (shipidx == -1) {
+                    for (int i = 1; i < ships.size(); i++) {
+                        // 艦隊IDを外す
+                        ships.get(i).setFleetid(null);
+                    }
                     // 旗艦以外解除
                     newdock.addShip(ships.get(0));
                 } else {
@@ -526,12 +530,19 @@ public final class GlobalContext {
                     ShipDto[] shiparray = new ShipDto[7];
 
                     for (int i = 0; i < ships.size(); i++) {
+                        // 艦隊IDを一旦全部外す
+                        ships.get(i).setFleetid(null);
                         shiparray[i] = ships.get(i);
                     }
+                    for (int i = 0; i < ships.size(); i++) {
+                        if (rship == ships.get(i)) {
+                            shiparray[i] = shiparray[shipidx];
+                        }
+                    }
                     shiparray[shipidx] = rship;
-
                     for (ShipDto shipdto : shiparray) {
                         if (shipdto != null) {
+                            shipdto.setFleetid(fleetid);
                             newdock.addShip(shipdto);
                         }
                     }
@@ -824,14 +835,25 @@ public final class GlobalContext {
         try {
             JsonObject apidata = data.getJsonObject().getJsonObject("api_data");
 
+            String shipidstr = data.getField("api_shipid");
             JsonArray shipdata = apidata.getJsonArray("api_ship_data");
             // 出撃中ではない
             Arrays.fill(isSortie, false);
-            // 情報を破棄
-            shipMap.clear();
-            for (int i = 0; i < shipdata.size(); i++) {
-                ShipDto ship = new ShipDto((JsonObject) shipdata.get(i));
-                shipMap.put(Long.valueOf(ship.getId()), ship);
+
+            if (shipidstr != null) {
+                // 艦娘の指定がある場合は艦娘を差し替える
+                Long shipid = Long.parseLong(shipidstr);
+                for (int i = 0; i < shipdata.size(); i++) {
+                    ShipDto ship = new ShipDto((JsonObject) shipdata.get(i));
+                    shipMap.put(shipid, ship);
+                }
+            } else {
+                // 情報を破棄
+                shipMap.clear();
+                for (int i = 0; i < shipdata.size(); i++) {
+                    ShipDto ship = new ShipDto((JsonObject) shipdata.get(i));
+                    shipMap.put(Long.valueOf(ship.getId()), ship);
+                }
             }
             // 艦隊を設定
             doDeck(apidata.getJsonArray("api_deck_data"));
